@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book braiding services with Ajas Blessed Touch in the Bronx, New York." />
+  <title>Ajas Blessed Touch | Brooklyn Braiding Studio</title>
+  <style>
+    :root{
+      --black:#15120f;
+      --brown:#4a6cea;
+      --gold:#ac59e8;
+      --cream:#ecc3ef;
+      --soft:#c0a3d6;
+      --white:#ffffff;
+      --muted:#385d6f;
+      --line:#60baf3;
+      --shadow:0 20px 55px rgba(49,32,20,.15);
+      --radius:26px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--soft);
+      color:var(--black);
+    }
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font:inherit}
+
+    .announcement{
+      background:var(--black);
+      color:#fff;
+      text-align:center;
+      padding:11px 16px;
+      font-size:.9rem;
+      letter-spacing:.04em;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,250,243,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(206, 155, 236, 0.8);
+    }
+    nav{
+      max-width:1160px;
+      min-height:80px;
+      margin:auto;
+      padding:12px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:24px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo{
+      width:54px;
+      height:54px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      color:var(--black);
+      background:linear-gradient(145deg,#f0a3f3,#9d36b7);
+      border:2px solid white;
+      box-shadow:0 8px 22px rgba(73,45,20,.18);
+      font-family:Georgia,serif;
+      font-weight:bold;
+      font-size:1.18rem;
+    }
+    .brand strong{
+      display:block;
+      font-family:Georgia,serif;
+      font-size:1.25rem;
+    }
+    .brand small{color:var(--muted)}
+    .links{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      font-size:.92rem;
+      font-weight:700;
+    }
+    .links a:hover{color:var(--gold)}
+
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      min-height:49px;
+      padding:12px 22px;
+      border-radius:999px;
+      border:none;
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-dark{background:var(--black);color:#fff}
+    .btn-gold{background:var(--gold);color:var(--black)}
+    .btn-light{background:#fff;border:1px solid var(--line)}
+    .btn-full{width:100%}
+
+    .hero{
+      min-height:690px;
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(90deg,rgba(52, 1, 60, 0.85),rgba(99, 8, 99, 0.45)),
+        radial-gradient(circle at 80% 30%,rgba(200,155,91,.35),transparent 30%),
+        linear-gradient(135deg,#2e2119,#6a4730);
+      color:white;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:440px;
+      height:440px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:50%;
+      right:-100px;
+      bottom:-130px;
+    }
+    .hero-inner{
+      width:100%;
+      max-width:1160px;
+      padding:90px 22px;
+      position:relative;
+      z-index:2;
+    }
+    .eyebrow{font-style:italic}
+    .eyebrow{
+      font-size:.10rem;
+      letter-spacing:.19em;
+      text-transform:uppercase;
+      width: 60%;
+      font-size:clamp(2.8rem,7vw,6.4rem);
+      /*max-width: 1200px;*/
+      padding: 30px 10px;
+      /*font-weight:400;*/
+      color:#645e0a;
+    }
+    h1,h2,h3{font-family:Georgia,serif}
+    h1{
+      max-width:780px;
+      margin:18px 0;
+      font-size:clamp(3.2rem,7vw,6.4rem);
+      line-height:.96;
+      letter-spacing:-.045em;
+    }
+    .e1{
+      color:white
+    }
+    h1 span{color:#d88deb;font-style:italic}
+    .hero p{
+      max-width:640px;
+      color:#eee3db;
+      font-size:1.08rem;
+      line-height:1.8;
+    }
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:30px;
+    }
+    .hero-points{
+      display:flex;
+      gap:26px;
+      flex-wrap:wrap;
+      margin-top:32px;
+      color:#eadfd6;
+      font-size:.92rem;
+    }
+    .hero-points span::before{
+      content:"✦";
+      color:#ca8deb;
+      margin-right:8px;
+    }
+
+    section{padding:78px 22px}
+    .container{max-width:1160px;margin:auto}
+    .section-head{
+      max-width:700px;
+      margin:0 auto 38px;
+      text-align:center;
+    }
+    .section-head h2{
+      font-size:clamp(2.2rem,4vw,3.5rem);
+      margin:10px 0 14px;
+    }
+    .section-head p{
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .service-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:20px;
+    }
+    .service{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:0 12px 35px rgba(71,47,29,.08);
+    }
+    .service-image{
+      min-height:220px;
+      display:grid;
+      place-items:center;
+      font-size:4rem;
+      background:
+        radial-gradient(circle at 30% 30%,#eeb4e4,transparent 25%),
+        linear-gradient(145deg,#38213f,#86478c);
+    }
+    .service-body{padding:24px}
+    .service h3{font-size:1.45rem;margin:0 0 9px}
+    .service p{color:var(--muted);line-height:1.65;min-height:78px}
+    .service small{
+      display:block;
+      margin:14px 0 20px;
+      color:var(--brown);
+      font-weight:800;
+    }
+
+    .hours{
+      background:var(--black);
+      color:white;
+    }
+    .hours-wrap{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:42px;
+      align-items:center;
+    }
+    .hours h2{
+      font-size:clamp(2.3rem,5vw,4rem);
+      margin:12px 0 16px;
+    }
+    .hours p{color:#ddd1c8;line-height:1.75}
+    .hours-card{
+      background:#211b17;
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:28px;
+      padding:28px;
+      box-shadow:0 18px 50px rgba(0,0,0,.25);
+    }
+    .hours-row{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      padding:17px 0;
+      border-bottom:1px solid rgba(255,255,255,.1);
+    }
+    .hours-row:last-child{border-bottom:0}
+    .hours-row span{color:#d7c9bf}
+    .hours-row strong{color:#efcb91;text-align:right}
+
+    .booking-area{
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:25px;
+      align-items:start;
+    }
+    .contact-card,.form-card{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:29px;
+      box-shadow:var(--shadow);
+    }
+    .contact-card{
+      position:sticky;
+      top:110px;
+    }
+    .contact-card h3,.form-card h3{
+      font-size:1.75rem;
+      margin-top:0;
+    }
+    .contact-list{
+      display:grid;
+      gap:17px;
+      margin-top:24px;
+    }
+    .contact-item{
+      display:grid;
+      grid-template-columns:42px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+    .contact-icon{
+      width:42px;
+      height:42px;
+      border-radius:13px;
+      display:grid;
+      place-items:center;
+      background:var(--cream);
+      color:var(--brown);
+      font-weight:900;
+    }
+    .contact-item b{display:block;margin-bottom:4px}
+    .contact-item span{color:var(--muted);font-size:.91rem;line-height:1.5}
+
+    .field-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    .field{margin-bottom:16px}
+    .full{grid-column:1/-1}
+    label{
+      display:block;
+      margin-bottom:7px;
+      font-weight:800;
+      font-size:.9rem;
+    }
+    input,select,textarea{
+      width:100%;
+      padding:13px 14px;
+      border:1px solid #d9c8b7;
+      border-radius:14px;
+      background:#fff;
+      outline:none;
+    }
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--gold);
+      box-shadow:0 0 0 4px rgba(200,155,91,.15);
+    }
+    textarea{min-height:115px;resize:vertical}
+    .note{
+      background:var(--cream);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:.86rem;
+      margin-bottom:17px;
+    }
+
+    .walkin{
+      background:linear-gradient(135deg,#eab5e9,#f0d8f7);
+    }
+    .walkin-box{
+      max-width:900px;
+      margin:auto;
+      text-align:center;
+      padding:50px;
+      border:1px solid rgba(94,61,33,.16);
+      background:rgba(255,255,255,.55);
+      border-radius:32px;
+    }
+    .walkin-box h2{
+      font-size:clamp(2.2rem,5vw,4rem);
+      margin:8px 0 15px;
+    }
+    .walkin-box p{
+      color:var(--muted);
+      line-height:1.7;
+      max-width:670px;
+      margin:0 auto 24px;
+    }
+
+    footer{
+      background:#110f0d;
+      color:white;
+      padding:44px 22px 24px;
+    }
+    .footer-grid{
+      max-width:1160px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:1.3fr 1fr 1fr;
+      gap:35px;
+    }
+    footer p,footer a{
+      color:#cfc2b8;
+      line-height:1.75;
+      font-size:.92rem;
+    }
+    .copyright{
+      max-width:1160px;
+      margin:30px auto 0;
+      padding-top:20px;
+      border-top:1px solid rgba(255,255,255,.1);
+      color:#9f9188;
+      text-align:center;
+      font-size:.82rem;
+    }
+    .floating{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:30;
+      width:59px;
+      height:59px;
+      border-radius:50%;
+      background:#25D366;
+      color:white;
+      display:grid;
+      place-items:center;
+      font-size:1.65rem;
+      box-shadow:0 14px 30px rgba(0,0,0,.25);
+    }
+
+    @media(max-width:860px){
+      .links a:not(.nav-btn){display:none}
+      .service-grid,.hours-wrap,.booking-area{grid-template-columns:1fr}
+      .contact-card{position:static}
+      .footer-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+      nav{padding:10px 15px}
+      .brand small{display:none}
+      .hero-inner,section{padding-left:16px;padding-right:16px}
+      .field-grid{grid-template-columns:1fr}
+      .hero-actions{display:grid}
+      .btn{width:100%}
+      .walkin-box{padding:34px 20px}
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">Appointments and walk-ins are welcome ✦ Brooklyn, New York</div>
+
+  <header>
+    <nav>
+      <a class="brand" href="#">
+        <div class="logo">ABT</div>
+        <div>
+          <strong>Ajas Blessed Touch</strong>
+          <small>Professional Braiding Studio</small>
+        </div>
+      </a>
+      <div class="links">
+        <a href="#services">Services</a>
+        <a href="#hours">Hours</a>
+        <a href="#booking">Book</a>
+        <a href="#contact">Contact</a>
+        <a class="btn btn-dark nav-btn" href="#booking">Book Now</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow"><h1><e1>Welcome to Ajas Blessed Touch</e1></h1></div>
+        <h1>Braids made with <span>skill, care</span> and a blessed touch.</h1>
+        <p>
+          Step into a comfortable Brooklyn braiding experience where every style is
+          created with patience, precision and your beauty in mind.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#booking">Book an Appointment</a>
+          <a class="btn btn-gold">Walk-ins Welcome</a>
+        </div>
+        <div class="hero-points">
+          <span>Appointments available</span>
+          <span>VIP late-night hours</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Our Services</div>
+          <h2>Choose the look that feels like you.</h2>
+          <p>
+            Select your preferred service below and send your booking request.
+            Prices shown are starting prices and may vary depending on hair length,
+            braid size, style complexity and any added hair or custom requests.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service">
+            <div class="service-image">👩🏾‍🦱</div>
+            <div class="service-body">
+              <h3>Knotless Braids</h3>
+              <p>Lightweight knotless braids styled in your preferred size, length and colour.</p>
+              <small>Starting at $200</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Knotless Braids">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">✨</div>
+            <div class="service-body">
+              <h3>Boho Braids</h3>
+              <p>Soft, flowing braids finished with loose curls for an effortless bohemian look.</p>
+              <small>Starting at $220</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Boho Braids">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">🪮</div>
+            <div class="service-body">
+              <h3>Box Braids</h3>
+              <p>A timeless protective style customised by size, colour, length and finish.</p>
+              <small>Starting at $180</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Box Braids">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">💫</div>
+            <div class="service-body">
+              <h3>Ponytail Braids</h3>
+              <p>A sleek braided ponytail style that is polished, stylish and easy to maintain.</p>
+              <small>Starting at $170</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Ponytail Braids">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">〰️</div>
+            <div class="service-body">
+              <h3>Straight-Back Braids</h3>
+              <p>Clean, neat straight-back cornrows designed for a smooth and long-lasting finish.</p>
+              <small>Starting at $170</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Straight-Back Braids">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">🌟</div>
+            <div class="service-body">
+              <h3>Stitch Braids</h3>
+              <p>Sharp, defined stitch braids created with precise sections and a clean finish.</p>
+              <small>Starting at $100</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Stitch Braids">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">👨🏾</div>
+            <div class="service-body">
+              <h3>Men’s Hairstyles</h3>
+              <p>Braids, twists and other neat protective styles designed specifically for men.</p>
+              <small>Starting at $100</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Men’s Hairstyles">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">🧴</div>
+            <div class="service-body">
+              <h3>Deep Treatment</h3>
+              <p>A nourishing hair treatment designed to restore moisture, softness and manageability.</p>
+              <small>$50</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Deep Treatment">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">🫧</div>
+            <div class="service-body">
+              <h3>Shampoo Service</h3>
+              <p>A thorough cleansing service to prepare and refresh your hair and scalp.</p>
+              <small>$80</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Shampoo Service">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">🌿</div>
+            <div class="service-body">
+              <h3>Natural Styles</h3>
+              <p>Beautiful natural-hair styling created to complement your texture and personal look.</p>
+              <small>Starting at $100</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Natural Styles">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">🎀</div>
+            <div class="service-body">
+              <h3>Kids’ Braids</h3>
+              <p>Comfortable, age-appropriate braided styles for children with a neat, lasting finish.</p>
+              <small>Starting at $120</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Kids’ Braids">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">💇🏾‍♀️</div>
+            <div class="service-body">
+              <h3>Wig Service</h3>
+              <p>Professional wig styling or installation tailored to your desired finished look.</p>
+              <small>Starting at $140</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Wig Service">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">➿</div>
+            <div class="service-body">
+              <h3>Twists</h3>
+              <p>A versatile protective style available in different sizes, lengths and finishes.</p>
+              <small>Starting at $90</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Twists">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">👑</div>
+            <div class="service-body">
+              <h3>Weaves</h3>
+              <p>A polished weave service styled to suit your preferred length, texture and finish.</p>
+              <small>Starting at $100</small>
+              <button class="btn btn-dark btn-full choose-service" data-service="Weaves">Choose Service</button>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-image">🧶</div>
+            <div class="service-body">
+              <h3>Crochet Braids</h3>
+              <p>A stylish, low-tension protective look installed using your chosen crochet hair.</p>
+              <small>Starting at $110</small>
+              <button class="btn btn-gold btn-full choose-service" data-service="Crochet Braids">Choose Service</button>
+            </div>
+          </article>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="hours" id="hours">
+      <div class="container hours-wrap">
+        <div>
+          <div class="eyebrow">Business Hours</div>
+          <h2>Beauty on your schedule.</h2>
+          <p>
+            Regular appointments are available throughout the week, with special
+            VIP hours offered on selected days. Please contact us to confirm VIP availability.
+          </p>
+          <a class="btn btn-gold" href="#booking">Check Availability</a>
+        </div>
+        <div class="hours-card">
+          <div class="hours-row"><span>Monday</span><strong>Closed</strong></div>
+          <div class="hours-row"><span>Tuesday–Sunday</span><strong>9:00 AM–6:00 PM</strong></div>
+          <div class="hours-row"><span>VIP Hours</span><strong>9:00 PM–7:00 AM</strong></div>
+          <div class="hours-row"><span>VIP Days</span><strong>Days vary — contact us</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="booking">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Book Your Appointment</div>
+          <h2>Your next style starts here.</h2>
+          <p>Complete the request form and your appointment details will open in a text message, ready to send.</p>
+        </div>
+
+        <div class="booking-area">
+          <aside class="contact-card" id="contact">
+            <h3>Contact Ajas Blessed Touch</h3>
+            <p style="color:var(--muted);line-height:1.7">Questions about a style, walk-in availability or VIP hours? Reach out directly.</p>
+            <div class="contact-list">
+              <div class="contact-item">
+                <div class="contact-icon">☎</div>
+                <div><b>Phone</b><span>929-582-0780</span></div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">✉</div>
+                <div><b>Email</b><span>AjasBlessedTouch05@icloud.com</span></div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">♪</div>
+                <div><b>TikTok</b><span>Ajas Blessed Touch LLC</span></div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">⌖</div>
+                <div><b>Location</b><span>Bronx, New York</span></div>
+              </div>
+            </div>
+          </aside>
+
+          <div class="form-card">
+            <h3>Appointment Request</h3>
+            <div class="note">
+              This form sends a request only. Your appointment is not confirmed until Ajas Blessed Touch responds with availability and any required booking details.
+            </div>
+
+            <form id="bookingForm">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="name">Full name *</label>
+                  <input id="name" required placeholder="Your full name" />
+                </div>
+                <div class="field">
+                  <label for="phone">Phone number *</label>
+                  <input id="phone" required placeholder="Your phone number" />
+                </div>
+
+                <div class="field">
+                  <label for="service">Braiding service *</label>
+                  <select id="service" required>
+                    <option value="">Choose a service</option>
+                    <option>Knotless Braids — from $200</option>
+                    <option>Boho Braids — from $220</option>
+                    <option>Box Braids — from $180</option>
+                    <option>Ponytail Braids — from $170</option>
+                    <option>Straight-Back Braids — from $170</option>
+                    <option>Stitch Braids — from $100</option>
+                    <option>Men’s Hairstyles — from $100</option>
+                    <option>Deep Treatment — $50</option>
+                    <option>Shampoo Service — $80</option>
+                    <option>Natural Styles — from $100</option>
+                    <option>Kids’ Braids — from $120</option>
+                    <option>Wig Service — from $140</option>
+                    <option>Twists — from $90</option>
+                    <option>Weaves — from $100</option>
+                    <option>Crochet Braids — from $110</option>
+                    <option>Other / Custom Style</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="appointmentType">Appointment type *</label>
+                  <select id="appointmentType" required>
+                    <option>Regular appointment</option>
+                    <option>VIP appointment</option>
+                    <option>Walk-in availability check</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="date">Preferred date *</label>
+                  <input id="date" type="date" required />
+                </div>
+
+                <div class="field">
+                  <label for="time">Preferred time *</label>
+                  <input id="time" type="time" required />
+                </div>
+
+                <div class="field full">
+                  <label for="details">Style details</label>
+                  <textarea id="details" placeholder="Tell us the size, length, colour and any other details about your desired style."></textarea>
+                </div>
+              </div>
+
+              <button class="btn btn-dark btn-full" type="submit">Send Booking Request</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="walkin">
+      <div class="container">
+        <div class="walkin-box">
+          <div class="eyebrow">Walk-ins Welcome</div>
+          <h2>Need a last-minute style?</h2>
+          <p>
+            Walk-ins are welcome based on availability. Calling ahead is recommended
+            so we can let you know the best time to come in and avoid a long wait.
+          </p>
+          <a class="btn btn-dark" href="tel:19295820780">Call Before You Come</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>Ajas Blessed Touch</h3>
+        <p>Professional braiding services in the Bronx, New York. Created with care, confidence and a blessed touch.</p>
+      </div>
+      <div>
+        <h3>Hours</h3>
+        <p>Monday: Closed<br>Tuesday–Sunday: 9 AM–6 PM<br>VIP: 9 PM–7 AM on selected days</p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p>929-582-0780<br>AjasBlessedTouch05@icloud.com<br>TikTok: Ajas Blessed Touch LLC</p>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Ajas Blessed Touch LLC. All rights reserved.</div>
+  </footer>
+
+  <a class="floating" href="sms:19295820780" aria-label="Text Ajas Blessed Touch">✉</a>
+
+  <script>
+    const serviceSelect = document.getElementById('service');
+
+    document.querySelectorAll('.choose-service').forEach(button => {
+      button.addEventListener('click', () => {
+        const selected = button.dataset.service;
+        [...serviceSelect.options].forEach((option, index) => {
+          if(option.textContent.startsWith(selected)) serviceSelect.selectedIndex = index;
+        });
+        document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    document.getElementById('bookingForm').addEventListener('submit', function(event){
+      event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const service = serviceSelect.value;
+      const appointmentType = document.getElementById('appointmentType').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const details = document.getElementById('details').value.trim() || 'No additional details';
+
+      const message =
+`Hello Ajas Blessed Touch!
+
+I would like to request an appointment.
+
+Name: ${name}
+Phone: ${phone}
+Service: ${service}
+Appointment type: ${appointmentType}
+Preferred date: ${date}
+Preferred time: ${time}
+
+Style details:
+${details}
+
+Please confirm availability.`;
+
+      window.location.href = `sms:19295820780?&body=${encodeURIComponent(message)}`;
+    });
+  </script>
+</body>
+</html>
