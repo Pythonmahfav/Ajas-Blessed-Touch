@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Book braiding services with Ajas Blessed Touch in the Bronx, New York." />
   <title>Ajas Blessed Touch | Brooklyn Braiding Studio</title>
+  <link rel="icon" type="Business/jpeg" href="business/logo.jpg">
   <style>
     :root{
       --black:#15120f;
-      --brown:#4a6cea;
+      --brown:#dd4aea;
       --gold:#ac59e8;
       --cream:#ecc3ef;
       --soft:#c0a3d6;
@@ -75,6 +76,22 @@
       font-weight:bold;
       font-size:1.18rem;
     }
+    .welcome-message {
+      text-align: center;
+      width: 100%;
+      margin: 0 auto 25px;
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      color: #fff;
+    }
+    .section-head .eyebrow,
+    .hours .eyebrow,
+    .walkin .eyebrow {
+      font-size: 2rem;
+      letter-spacing: .08em;
+    }
     .brand strong{
       display:block;
       font-family:Georgia,serif;
@@ -132,22 +149,49 @@
     }
     .hero-inner{
       width:100%;
-      max-width:1160px;
+      max-width:1000px;
       padding:90px 22px;
       position:relative;
       z-index:2;
     }
-    .eyebrow{font-style:italic}
-    .eyebrow{
-      font-size:.10rem;
-      letter-spacing:.19em;
-      text-transform:uppercase;
-      width: 60%;
-      font-size:clamp(2.8rem,7vw,6.4rem);
-      /*max-width: 1200px;*/
-      padding: 30px 10px;
-      /*font-weight:400;*/
-      color:#645e0a;
+    .hero-inner h1 {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero p {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero .eyebrow {
+      font-size: clamp(2.2rem, 5vw, 5rem);
+    }
+
+    .hero-inner > h1 {
+      font-size: clamp(2.6rem, 6vw, 5.5rem);
+    }
+    .hero-points {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+      color: #eadfd6;
+      font-size: .92rem;
+      text-align: center;
+    }
+   .eyebrow {
+  font-style: italic;
+  font-size: clamp(2.8rem, 7vw, 6.4rem);
+  letter-spacing: .19em;
+  text-transform: uppercase;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding:5px 30px 10px;
+  color: #fffffc;
     }
     h1,h2,h3{font-family:Georgia,serif}
     h1{
@@ -173,6 +217,14 @@
       flex-wrap:wrap;
       margin-top:30px;
     }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
     .hero-points{
       display:flex;
       gap:26px;
@@ -180,6 +232,11 @@
       margin-top:32px;
       color:#eadfd6;
       font-size:.92rem;
+    }
+    .hero-points {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
     }
     .hero-points span::before{
       content:"✦";
@@ -203,36 +260,72 @@
       line-height:1.75;
     }
 
-    .service-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:20px;
-    }
-    .service{
-      background:white;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      overflow:hidden;
-      box-shadow:0 12px 35px rgba(71,47,29,.08);
-    }
-    .service-image{
-      min-height:220px;
-      display:grid;
-      place-items:center;
-      font-size:4rem;
-      background:
-        radial-gradient(circle at 30% 30%,#eeb4e4,transparent 25%),
-        linear-gradient(145deg,#38213f,#86478c);
-    }
-    .service-body{padding:24px}
-    .service h3{font-size:1.45rem;margin:0 0 9px}
-    .service p{color:var(--muted);line-height:1.65;min-height:78px}
-    .service small{
-      display:block;
-      margin:14px 0 20px;
-      color:var(--brown);
-      font-weight:800;
-    }
+    .service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.service {
+  width: 100%;
+  min-width: 0;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.service-image {
+  width: 100%;
+  height: clamp(190px, 17vw, 250px);
+  overflow: hidden;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 14px;
+  filter:
+    drop-shadow(0 0 10px rgba(255, 170, 220, 0.45))
+    drop-shadow(0 0 18px rgba(180, 130, 255, 0.35));
+}
+
+.service-body {
+  padding: 12px;
+}
+
+.service-body h3 {
+  margin: 0 0 7px;
+  font-size: 1rem;
+}
+
+.service-body p {
+  margin: 0 0 8px;
+  font-size: .82rem;
+  line-height: 1.4;
+}
+
+.service-body small {
+  display: block;
+  margin: 8px 0;
+  font-size: .8rem;
+}
+
+.service .btn {
+  min-height: 40px;
+  padding: 8px 10px;
+  font-size: .78rem;
+}
+
 
     .hours{
       background:var(--black);
@@ -248,10 +341,10 @@
       font-size:clamp(2.3rem,5vw,4rem);
       margin:12px 0 16px;
     }
-    .hours p{color:#ddd1c8;line-height:1.75}
+    .hours p{color:#d9c8dd;line-height:1.75}
     .hours-card{
       background:#211b17;
-      border:1px solid rgba(255,255,255,.11);
+      border:1px solid rgba(255, 255, 255, 0.236);
       border-radius:28px;
       padding:28px;
       box-shadow:0 18px 50px rgba(0,0,0,.25);
@@ -264,8 +357,8 @@
       border-bottom:1px solid rgba(255,255,255,.1);
     }
     .hours-row:last-child{border-bottom:0}
-    .hours-row span{color:#d7c9bf}
-    .hours-row strong{color:#efcb91;text-align:right}
+    .hours-row span{color:#d3bfd7}
+    .hours-row strong{color:#dc91ef;text-align:right}
 
     .booking-area{
       display:grid;
@@ -332,6 +425,9 @@
       border-radius:14px;
       background:#fff;
       outline:none;
+    }
+    .services-description {
+      color: #000000 !important;
     }
     input:focus,select:focus,textarea:focus{
       border-color:var(--gold);
@@ -406,7 +502,7 @@
       width:59px;
       height:59px;
       border-radius:50%;
-      background:#25D366;
+      background:#c725d3;
       color:white;
       display:grid;
       place-items:center;
@@ -414,21 +510,188 @@
       box-shadow:0 14px 30px rgba(0,0,0,.25);
     }
 
-    @media(max-width:860px){
-      .links a:not(.nav-btn){display:none}
-      .service-grid,.hours-wrap,.booking-area{grid-template-columns:1fr}
-      .contact-card{position:static}
-      .footer-grid{grid-template-columns:1fr}
-    }
-    @media(max-width:560px){
-      nav{padding:10px 15px}
-      .brand small{display:none}
-      .hero-inner,section{padding-left:16px;padding-right:16px}
-      .field-grid{grid-template-columns:1fr}
-      .hero-actions{display:grid}
-      .btn{width:100%}
-      .walkin-box{padding:34px 20px}
-    }
+ @media (max-width: 1000px) {
+  .service-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+@media (max-width: 800px) {
+
+  /* Navigation */
+  nav {
+    flex-direction: column;
+    padding: 15px 18px;
+    gap: 15px;
+  }
+
+  .brand {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .links {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+
+  .nav-btn {
+    width: auto;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 650px;
+  }
+
+  .hero-inner {
+    padding: 70px 18px;
+  }
+
+  .welcome-message {
+    margin-bottom: 20px;
+  }
+
+  .hero-inner > h1 {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-points {
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Business hours */
+  .hours-wrap {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* Booking */
+  .booking-area {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    position: static;
+  }
+
+  /* Form */
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  /* Walk-in */
+  .walkin-box {
+    padding: 35px 20px;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  section {
+    padding: 60px 16px;
+  }
+
+  .hero {
+    min-height: 620px;
+  }
+
+  .hero-inner {
+    padding: 60px 16px;
+  }
+
+  .welcome-message {
+    font-size: clamp(1.8rem, 9vw, 3rem);
+  }
+
+  .hero-inner > h1 {
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+  }
+
+  .hero p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-points {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-card,
+  .form-card {
+    padding: 22px;
+  }
+
+  .hours-card {
+    padding: 20px;
+  }
+
+  .hours-row {
+    gap: 12px;
+  }
+
+  .walkin-box {
+    padding: 30px 18px;
+  }
+
+  .links {
+    font-size: .85rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -437,8 +700,8 @@
   <header>
     <nav>
       <a class="brand" href="#">
-        <div class="logo">ABT</div>
-        <div>
+        <img class="logo" src="business/logo.jpg" alt="Ajas Blessed Touch logo">
+      <div>
           <strong>Ajas Blessed Touch</strong>
           <small>Professional Braiding Studio</small>
         </div>
@@ -456,7 +719,9 @@
   <main>
     <section class="hero">
       <div class="hero-inner">
-        <div class="eyebrow"><h1><e1>Welcome to Ajas Blessed Touch</e1></h1></div>
+        <div class="welcome-message">
+          Welcome to Ajas Blessed Touch
+        </div>        
         <h1>Braids made with <span>skill, care</span> and a blessed touch.</h1>
         <p>
           Step into a comfortable Brooklyn braiding experience where every style is
@@ -474,170 +739,264 @@
     </section>
 
     <section id="services">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Our Services</div>
-          <h2>Choose the look that feels like you.</h2>
-          <p>
-            Select your preferred service below and send your booking request.
-            Prices shown are starting prices and may vary depending on hair length,
-            braid size, style complexity and any added hair or custom requests.
-          </p>
+  <div class="container">
+
+    <div class="section-head">
+      <div class="eyebrow">Our Services</div>
+
+      <h2>Choose the look that feels like you.</h2>
+
+      <p class="services-description">
+        Select your preferred service below and send your booking request.
+        Prices shown are starting prices and may vary depending on hair length,
+        braid size, style complexity and any added hair or custom requests.
+      </p>
+
+    <div class="service-grid">
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic3.jpeg" alt="Knotless Braids">
         </div>
 
-        <div class="service-grid">
-          <article class="service">
-            <div class="service-image">👩🏾‍🦱</div>
-            <div class="service-body">
-              <h3>Knotless Braids</h3>
-              <p>Lightweight knotless braids styled in your preferred size, length and colour.</p>
-              <small>Starting at $200</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Knotless Braids">Choose Service</button>
-            </div>
-          </article>
+        <div class="service-body">
+          <h3>Knotless Braids</h3>
+          <p>Lightweight knotless braids styled in your preferred size, length and colour.</p>
+          <small>Starting at $200</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Knotless Braids">
+            Choose Service
+          </button>
+        </div>
+      </article>
 
-          <article class="service">
-            <div class="service-image">✨</div>
-            <div class="service-body">
-              <h3>Boho Braids</h3>
-              <p>Soft, flowing braids finished with loose curls for an effortless bohemian look.</p>
-              <small>Starting at $220</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Boho Braids">Choose Service</button>
-            </div>
-          </article>
 
-          <article class="service">
-            <div class="service-image">🪮</div>
-            <div class="service-body">
-              <h3>Box Braids</h3>
-              <p>A timeless protective style customised by size, colour, length and finish.</p>
-              <small>Starting at $180</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Box Braids">Choose Service</button>
-            </div>
-          </article>
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic10.jpeg" alt="Boho Braids">
+        </div>
 
-          <article class="service">
-            <div class="service-image">💫</div>
-            <div class="service-body">
-              <h3>Ponytail Braids</h3>
-              <p>A sleek braided ponytail style that is polished, stylish and easy to maintain.</p>
-              <small>Starting at $170</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Ponytail Braids">Choose Service</button>
-            </div>
-          </article>
+        <div class="service-body">
+          <h3>Boho Braids</h3>
+          <p>Soft, flowing braids finished with loose curls for an effortless bohemian look.</p>
+          <small>Starting at $220</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Boho Braids">
+            Choose Service
+          </button>
+        </div>
+      </article>
 
-          <article class="service">
-            <div class="service-image">〰️</div>
-            <div class="service-body">
-              <h3>Straight-Back Braids</h3>
-              <p>Clean, neat straight-back cornrows designed for a smooth and long-lasting finish.</p>
-              <small>Starting at $170</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Straight-Back Braids">Choose Service</button>
-            </div>
-          </article>
 
-          <article class="service">
-            <div class="service-image">🌟</div>
-            <div class="service-body">
-              <h3>Stitch Braids</h3>
-              <p>Sharp, defined stitch braids created with precise sections and a clean finish.</p>
-              <small>Starting at $100</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Stitch Braids">Choose Service</button>
-            </div>
-          </article>
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic12.jpeg" alt="Boho Braids">
+        </div>
 
-          <article class="service">
-            <div class="service-image">👨🏾</div>
-            <div class="service-body">
-              <h3>Men’s Hairstyles</h3>
-              <p>Braids, twists and other neat protective styles designed specifically for men.</p>
-              <small>Starting at $100</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Men’s Hairstyles">Choose Service</button>
-            </div>
-          </article>
+        <div class="service-body">
+          <h3>Box Braids</h3>
+          <p>A timeless protective style customised by size, colour, length and finish.</p>
+          <small>Starting at $180</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Box Braids">
+            Choose Service
+          </button>
+        </div>
+      </article>
 
-          <article class="service">
-            <div class="service-image">🧴</div>
-            <div class="service-body">
-              <h3>Deep Treatment</h3>
-              <p>A nourishing hair treatment designed to restore moisture, softness and manageability.</p>
-              <small>$50</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Deep Treatment">Choose Service</button>
-            </div>
-          </article>
 
-          <article class="service">
-            <div class="service-image">🫧</div>
-            <div class="service-body">
-              <h3>Shampoo Service</h3>
-              <p>A thorough cleansing service to prepare and refresh your hair and scalp.</p>
-              <small>$80</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Shampoo Service">Choose Service</button>
-            </div>
-          </article>
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic2.jpeg" alt="Boho Braids">
+        </div>
 
-          <article class="service">
-            <div class="service-image">🌿</div>
-            <div class="service-body">
-              <h3>Natural Styles</h3>
-              <p>Beautiful natural-hair styling created to complement your texture and personal look.</p>
-              <small>Starting at $100</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Natural Styles">Choose Service</button>
-            </div>
-          </article>
+        <div class="service-body">
+          <h3>Ponytail Braids</h3>
+          <p>A sleek braided ponytail style that is polished, stylish and easy to maintain.</p>
+          <small>Starting at $170</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Ponytail Braids">
+            Choose Service
+          </button>
+        </div>
+      </article>
 
-          <article class="service">
-            <div class="service-image">🎀</div>
-            <div class="service-body">
-              <h3>Kids’ Braids</h3>
-              <p>Comfortable, age-appropriate braided styles for children with a neat, lasting finish.</p>
-              <small>Starting at $120</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Kids’ Braids">Choose Service</button>
-            </div>
-          </article>
 
-          <article class="service">
-            <div class="service-image">💇🏾‍♀️</div>
-            <div class="service-body">
-              <h3>Wig Service</h3>
-              <p>Professional wig styling or installation tailored to your desired finished look.</p>
-              <small>Starting at $140</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Wig Service">Choose Service</button>
-            </div>
-          </article>
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic5.jpeg" alt="Boho Braids">
+        </div>
 
-          <article class="service">
-            <div class="service-image">➿</div>
-            <div class="service-body">
-              <h3>Twists</h3>
-              <p>A versatile protective style available in different sizes, lengths and finishes.</p>
-              <small>Starting at $90</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Twists">Choose Service</button>
-            </div>
-          </article>
+        <div class="service-body">
+          <h3>Straight-Back Braids</h3>
+          <p>Clean, neat straight-back cornrows designed for a smooth and long-lasting finish.</p>
+          <small>Starting at $170</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Straight-Back Braids">
+            Choose Service
+          </button>
+        </div>
+      </article>
 
-          <article class="service">
-            <div class="service-image">👑</div>
-            <div class="service-body">
-              <h3>Weaves</h3>
-              <p>A polished weave service styled to suit your preferred length, texture and finish.</p>
-              <small>Starting at $100</small>
-              <button class="btn btn-dark btn-full choose-service" data-service="Weaves">Choose Service</button>
-            </div>
-          </article>
 
-          <article class="service">
-            <div class="service-image">🧶</div>
-            <div class="service-body">
-              <h3>Crochet Braids</h3>
-              <p>A stylish, low-tension protective look installed using your chosen crochet hair.</p>
-              <small>Starting at $110</small>
-              <button class="btn btn-gold btn-full choose-service" data-service="Crochet Braids">Choose Service</button>
-            </div>
-          </article>
-        </div></div>
-      </div>
-    </section>
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic14.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3>Stitch Braids</h3>
+          <p>Sharp, sleek, and stitched to perfection.</p>
+          <small>Starting at $100</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Stitch Braids">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic4.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3>Men’s Hairstyles</h3>
+          <p>Fresh, clean, and tailored to your style.</p>
+          <small>Starting at $100</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Men’s Hairstyles">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/wig install.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3>Wig installation</h3>
+          <p>Laid to perfection, giving you a flawless look that lasts.</p>
+          <small>Starting at $140</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Deep Treatment">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic13.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3>Flip over Mohawk Boho Braids</h3>
+          <p>A bold flip-over style with the perfect boho touch.</p>
+          <small>$80</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Shampoo Service">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic11.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3> Boho Twist With Cornrows</h3>
+          <p>Beautiful natural-hair styling created to complement your texture and personal look.</p>
+          <small>Starting at $100</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Natural Styles">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic8.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3>Boho Ponytail</h3>
+          <p>Effortlessly chic with the perfect boho flair.</p>
+          <small>Starting at $170</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Kids’ Braids">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic7.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3> Closure Weaves</h3>
+          <p>A natural-looking closure with a smooth, polished finish.</p>
+          <small>Starting at $100</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Wig Service">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic6.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3>Kids Hairstyles</h3>
+          <p>Keeping little ones cute, confident, and beautifully styled.</p>
+          <small>Starting at $120</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Twists">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/pic1.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3>Miracle Knots</h3>
+          <p>A polished weave service styled to suit your preferred length, texture and finish.</p>
+          <small>Starting at $100</small>
+          <button class="btn btn-dark btn-full choose-service" data-service="Weaves">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+
+      <article class="service">
+        <div class="service-image">
+          <img src="business/deep-conditioning-treatment.webp.jpeg" alt="Boho Braids">
+        </div>
+
+        <div class="service-body">
+          <h3>Deep Treatment</h3>
+          <p>Restore, nourish, and revive your hair with a deep treatment</p>
+          <small>Starting at $50</small>
+          <button class="btn btn-gold btn-full choose-service" data-service="Crochet Braids">
+            Choose Service
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
 
     <section class="hours" id="hours">
       <div class="container hours-wrap">
@@ -686,7 +1045,7 @@
               </div>
               <div class="contact-item">
                 <div class="contact-icon">⌖</div>
-                <div><b>Location</b><span>Bronx, New York</span></div>
+                <div><b>Location</b><span>Brooklyn, New York</span></div>
               </div>
             </div>
           </aside>
@@ -839,8 +1198,7 @@ ${details}
 
 Please confirm availability.`;
 
-      window.location.href = `sms:19295820780?&body=${encodeURIComponent(message)}`;
-    });
+window.location.href = `https://wa.me/19295820780?text=${encodeURIComponent(message)}`;    });
   </script>
 </body>
 </html>
