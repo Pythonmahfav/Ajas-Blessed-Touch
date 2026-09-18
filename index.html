@@ -417,26 +417,37 @@
 
  .service-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  width: 92%;
-  max-width: 1100px;
-  margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 45px auto 0;
 }
 
 .service {
   width: 100%;
   min-width: 0;
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 18px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(172,89,232,.25);
+  border-radius: 22px;
   overflow: hidden;
   padding: 0;
+  box-shadow: 0 12px 35px rgba(49,32,20,.10);
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+
+.service:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 45px rgba(120,50,150,.20);
+  border-color: rgba(172,89,232,.55);
 }
 
 .service-image {
   width: 100%;
-  height: 180px;
+  height: 220px;
   overflow: hidden;
   background: white;
   display: flex;
@@ -447,15 +458,63 @@
 }
 
 .service-image img {
+  .service-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform .6s ease;
   filter:
     drop-shadow(0 0 10px rgba(255, 170, 220, 0.45))
     drop-shadow(0 0 18px rgba(180, 130, 255, 0.35));
 }
+  .service:hover .service-image img {
+  transform: scale(1.06);
+}
+#services {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(221,74,234,.15), transparent 25%),
+    radial-gradient(circle at 90% 70%, rgba(172,89,232,.14), transparent 25%),
+    linear-gradient(180deg, #f7eafa 0%, #ecc3ef 100%);
+}
+  #services::before,
+#services::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(2px);
+}
 
+#services::before {
+  width: 220px;
+  height: 220px;
+  left: -100px;
+  top: 180px;
+  background: rgba(221,74,234,.12);
+  animation: floatBubble 7s ease-in-out infinite;
+}
+
+#services::after {
+  width: 280px;
+  height: 280px;
+  right: -130px;
+  bottom: 180px;
+  background: rgba(172,89,232,.12);
+  animation: floatBubble 9s ease-in-out infinite reverse;
+}
+
+@keyframes floatBubble {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-25px) scale(1.05);
+  }
+}
 .service-body {
   padding: 12px;
 }
@@ -667,15 +726,16 @@
       box-shadow:0 14px 30px rgba(0,0,0,.25);
     }
 
- @media (max-width: 1000px) {
+ @media (max-width: 1100px) {
   .service-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 750px) {
   .service-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
   }
 }
 
@@ -684,7 +744,6 @@
     grid-template-columns: 1fr;
   }
 }
-
 /* =========================
    RESPONSIVE DESIGN
    ========================= */
