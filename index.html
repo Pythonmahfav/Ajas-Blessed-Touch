@@ -246,7 +246,160 @@
       margin-right:8px;
     }
 
-    section{padding:78px 22px}
+    /* =========================
+   STYLE SLIDESHOW
+========================= */
+
+.style-slideshow {
+  position: relative;
+  width: 92%;
+  max-width: 1050px;
+  height: 520px;
+  margin: 0 auto 70px;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #111;
+  box-shadow: 0 25px 60px rgba(0,0,0,.18);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .7s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Dark overlay */
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.75),
+    rgba(0,0,0,.05) 65%
+  );
+}
+
+/* Caption */
+
+.slide-caption {
+  position: absolute;
+  z-index: 3;
+  left: 40px;
+  bottom: 45px;
+  color: white;
+}
+
+.slide-caption h3 {
+  font-size: 2rem;
+  margin: 0 0 7px;
+}
+
+.slide-caption p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Arrows */
+
+.slide-btn {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.5);
+  background: rgba(0,0,0,.35);
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  backdrop-filter: blur(8px);
+  transition: .25s ease;
+}
+
+.slide-btn:hover {
+  background: rgba(0,0,0,.7);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+/* Dots */
+
+.slide-dots {
+  position: absolute;
+  z-index: 5;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.5);
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.active-dot {
+  width: 25px;
+  border-radius: 20px;
+  background: white;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  .style-slideshow {
+    width: 100%;
+    height: 430px;
+    border-radius: 22px;
+    margin-bottom: 55px;
+  }
+
+  .slide-caption {
+    left: 25px;
+    bottom: 40px;
+  }
+
+  .slide-caption h3 {
+    font-size: 1.5rem;
+  }
+
+  .slide-caption p {
+    font-size: .85rem;
+  }
+
+}
+    section{padding:95px 22px}
     .container{max-width:1160px;margin:auto}
     .section-head{
       max-width:700px;
@@ -265,7 +418,7 @@
  .service-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 32px;
   width: 92%;
   max-width: 1100px;
   margin: 0 auto;
@@ -742,6 +895,65 @@
       </div>
     </section>
 
+    <!-- =========================
+     STYLE SLIDESHOW
+========================= -->
+
+<div class="style-slideshow">
+
+  <div class="slide active">
+    <img src="business/pic3.jpeg" alt="Knotless Braids">
+    <div class="slide-caption">
+      <h3>Knotless Braids</h3>
+      <p>Beautiful, lightweight and elegant.</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <img src="business/pic10.jpeg" alt="Boho Braids">
+    <div class="slide-caption">
+      <h3>Boho Braids</h3>
+      <p>Soft curls with a beautiful bohemian finish.</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <img src="business/pic12.jpeg" alt="Box Braids">
+    <div class="slide-caption">
+      <h3>Box Braids</h3>
+      <p>Classic, stylish and protective.</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <img src="business/pic13.jpeg" alt="Boho Braids">
+    <div class="slide-caption">
+      <h3>Boho Styles</h3>
+      <p>Creative styles made just for you.</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <img src="business/pic8.jpeg" alt="Boho Ponytail">
+    <div class="slide-caption">
+      <h3>Boho Ponytail</h3>
+      <p>Effortlessly chic with the perfect finish.</p>
+    </div>
+  </div>
+
+  <button class="slide-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+  <button class="slide-btn next" onclick="changeSlide(1)">&#10095;</button>
+
+  <div class="slide-dots">
+    <span class="dot active-dot" onclick="showSlide(0)"></span>
+    <span class="dot" onclick="showSlide(1)"></span>
+    <span class="dot" onclick="showSlide(2)"></span>
+    <span class="dot" onclick="showSlide(3)"></span>
+    <span class="dot" onclick="showSlide(4)"></span>
+  </div>
+
+</div>
+
     <section id="services">
   <div class="container">
 
@@ -1162,6 +1374,47 @@
   <a class="floating" href="sms:19295820780" aria-label="Text Ajas Blessed Touch">✉</a>
 
   <script>
+    /* =========================
+   STYLE SLIDESHOW
+========================= */
+
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(index) {
+
+  if (index >= slides.length) {
+    currentSlide = 0;
+  }
+
+  if (index < 0) {
+    currentSlide = slides.length - 1;
+  }
+
+  slides.forEach(slide => {
+    slide.classList.remove("active");
+  });
+
+  dots.forEach(dot => {
+    dot.classList.remove("active-dot");
+  });
+
+  slides[currentSlide].classList.add("active");
+  dots[currentSlide].classList.add("active-dot");
+}
+
+function changeSlide(direction) {
+  currentSlide += direction;
+  showSlide(currentSlide);
+}
+
+/* Automatically change every 4 seconds */
+
+setInterval(() => {
+  currentSlide++;
+  showSlide(currentSlide);
+}, 4000);
     const serviceSelect = document.getElementById('service');
 
     document.querySelectorAll('.choose-service').forEach(button => {
