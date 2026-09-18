@@ -452,44 +452,46 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 10% 20%, rgba(221,74,234,.15), transparent 25%),
-    radial-gradient(circle at 90% 70%, rgba(172,89,232,.14), transparent 25%),
-    linear-gradient(180deg, #f7eafa 0%, #ecc3ef 100%);
+    linear-gradient(
+      135deg,
+      #e8d4f0 0%,
+      #c9a8d9 50%,
+      #e8d4f0 100%
+    );
 }
-  #services::before,
+#services::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  left: -150px;
+  top: 250px;
+  animation: floatingShape 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
 #services::after {
   content: "";
   position: absolute;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
+  background: rgba(172,89,232,.15);
+  right: -100px;
+  bottom: 300px;
+  animation: floatingShape 10s ease-in-out infinite reverse;
   pointer-events: none;
-  filter: blur(2px);
 }
 
-#services::before {
-  width: 220px;
-  height: 220px;
-  left: -100px;
-  top: 180px;
-  background: rgba(221,74,234,.12);
-  animation: floatBubble 7s ease-in-out infinite;
-}
-
-#services::after {
-  width: 280px;
-  height: 280px;
-  right: -130px;
-  bottom: 180px;
-  background: rgba(172,89,232,.12);
-  animation: floatBubble 9s ease-in-out infinite reverse;
-}
-
-@keyframes floatBubble {
+@keyframes floatingShape {
   0%, 100% {
-    transform: translateY(0) scale(1);
+    transform: translateY(0) rotate(0deg);
   }
 
   50% {
-    transform: translateY(-25px) scale(1.05);
+    transform: translateY(-30px) rotate(10deg);
   }
 }
 .service-body {
@@ -990,7 +992,8 @@
 
 </div>
 
-   <div class="section-head">
+<div class="section-head">
+
   <div class="eyebrow">Our Services</div>
 
   <h2>Choose the look that feels like you.</h2>
@@ -1000,6 +1003,7 @@
     Prices shown are starting prices and may vary depending on hair length,
     braid size, style complexity and any added hair or custom requests.
   </p>
+
 </div>
     
     <div class="service-grid">
