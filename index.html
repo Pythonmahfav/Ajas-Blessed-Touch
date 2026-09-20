@@ -544,7 +544,154 @@
   background: #ac59e8;
   color: #15120f;
 }
+/* =========================
+   APPOINTMENT CALENDAR
+   ========================= */
 
+.calendar-box {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.calendar-box h4 {
+  margin: 0 0 6px;
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+}
+
+.calendar-help {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 7px;
+}
+
+.calendar-day-name {
+  text-align: center;
+  font-weight: 800;
+  font-size: .75rem;
+  padding: 8px 2px;
+}
+
+.calendar-day {
+  min-height: 42px;
+  border: 1px solid #e5d8e8;
+  border-radius: 10px;
+  background: #f8f3f9;
+  cursor: pointer;
+  font-weight: 700;
+  color: #777;
+}
+
+.calendar-day:hover {
+  border-color: var(--gold);
+}
+
+.calendar-day.available {
+  background: #f0d8f7;
+  color: #15120f;
+  border-color: #c875d8;
+}
+
+.calendar-day.selected {
+  background: var(--gold);
+  color: white;
+  border-color: var(--gold);
+}
+
+.calendar-day.unavailable {
+  background: #eeeeee;
+  color: #aaa;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.calendar-day.empty {
+  border: none;
+  background: transparent;
+  cursor: default;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar-header button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: var(--soft);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.calendar-month {
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.selected-date {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--cream);
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.time-slot {
+  padding: 10px;
+  border: 1px solid #d9c8e0;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: .85rem;
+}
+
+.time-slot:hover {
+  border-color: var(--gold);
+}
+
+.time-slot.selected {
+  background: var(--gold);
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .calendar-day {
+    min-height: 38px;
+    font-size: .8rem;
+  }
+
+  .time-slots {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
     .hours{
       background:var(--black);
       color:white;
@@ -1358,15 +1505,38 @@
                   </select>
                 </div>
 
-                <div class="field">
-                  <label for="date">Preferred date *</label>
-                  <input id="date" type="date" required />
-                </div>
+                <div class="field full">
 
-                <div class="field">
-                  <label for="time">Preferred time *</label>
-                  <input id="time" type="time" required />
-                </div>
+  <div class="calendar-box">
+
+    <h4>Choose Your Appointment Date</h4>
+
+    <p class="calendar-help">
+      Select an available date and then choose an available time.
+    </p>
+
+    <div class="calendar-header">
+      <button type="button" id="prevMonth">‹</button>
+
+      <div class="calendar-month" id="calendarMonth"></div>
+
+      <button type="button" id="nextMonth">›</button>
+    </div>
+
+    <div class="calendar-grid" id="calendar"></div>
+
+    <div class="selected-date" id="selectedDate">
+      Please select a date.
+    </div>
+
+    <div class="time-slots" id="timeSlots"></div>
+
+  </div>
+
+  <input type="hidden" id="date" required>
+  <input type="hidden" id="time" required>
+
+</div>
 
                 <div class="field full">
                   <label for="details">Style details</label>
@@ -1417,6 +1587,173 @@
   <a class="floating" href="sms:19295820780" aria-label="Text Ajas Blessed Touch">✉</a>
 
   <script>
+    /* =========================
+   APPOINTMENT CALENDAR
+   ========================= */
+
+const calendar = document.getElementById("calendar");
+const calendarMonth = document.getElementById("calendarMonth");
+const selectedDateDisplay = document.getElementById("selectedDate");
+const timeSlots = document.getElementById("timeSlots");
+const dateInput = document.getElementById("date");
+const timeInput = document.getElementById("time");
+
+let currentMonth = new Date();
+let selectedDate = null;
+
+/*
+  TEMPORARY AVAILABILITY
+
+  These dates are examples for testing.
+  We will replace this with the owner's
+  real availability in Step 2.
+*/
+
+const availableDates = {
+  "2026-09-22": ["9:00 AM", "11:00 AM", "1:00 PM", "3:00 PM"],
+  "2026-09-23": ["9:00 AM", "11:00 AM", "1:00 PM", "3:00 PM"],
+  "2026-09-25": ["10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM"],
+  "2026-09-26": ["9:00 AM", "11:00 AM", "1:00 PM"]
+};
+
+function formatDate(year, month, day) {
+  return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+function renderCalendar() {
+
+  calendar.innerHTML = "";
+
+  const year = currentMonth.getFullYear();
+  const month = currentMonth.getMonth();
+
+  calendarMonth.textContent = new Date(
+    year,
+    month
+  ).toLocaleString("default", {
+    month: "long",
+    year: "numeric"
+  });
+
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  dayNames.forEach(day => {
+    const heading = document.createElement("div");
+    heading.className = "calendar-day-name";
+    heading.textContent = day;
+    calendar.appendChild(heading);
+  });
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  for (let i = 0; i < firstDay; i++) {
+    const empty = document.createElement("div");
+    empty.className = "calendar-day empty";
+    calendar.appendChild(empty);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+
+    const dateKey = formatDate(year, month, day);
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "calendar-day";
+    button.textContent = day;
+
+    if (availableDates[dateKey]) {
+
+      button.classList.add("available");
+
+      button.addEventListener("click", () => {
+
+        selectedDate = dateKey;
+
+        document.querySelectorAll(".calendar-day")
+          .forEach(dayButton =>
+            dayButton.classList.remove("selected")
+          );
+
+        button.classList.add("selected");
+
+        dateInput.value = dateKey;
+
+        selectedDateDisplay.textContent =
+          `Selected date: ${new Date(
+            dateKey + "T12:00:00"
+          ).toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+          })}`;
+
+        showTimeSlots(dateKey);
+
+      });
+
+    } else {
+
+      button.classList.add("unavailable");
+      button.disabled = true;
+
+    }
+
+    calendar.appendChild(button);
+  }
+}
+
+function showTimeSlots(dateKey) {
+
+  timeSlots.innerHTML = "";
+
+  const times = availableDates[dateKey] || [];
+
+  times.forEach(time => {
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "time-slot";
+    button.textContent = time;
+
+    button.addEventListener("click", () => {
+
+      document.querySelectorAll(".time-slot")
+        .forEach(slot =>
+          slot.classList.remove("selected")
+        );
+
+      button.classList.add("selected");
+
+      timeInput.value = time;
+
+    });
+
+    timeSlots.appendChild(button);
+
+  });
+}
+
+document.getElementById("prevMonth").addEventListener("click", () => {
+
+  currentMonth.setMonth(currentMonth.getMonth() - 1);
+
+  renderCalendar();
+
+});
+
+document.getElementById("nextMonth").addEventListener("click", () => {
+
+  currentMonth.setMonth(currentMonth.getMonth() + 1);
+
+  renderCalendar();
+
+});
+
+renderCalendar();
     /* =========================
    STYLE SLIDESHOW
 ========================= */
