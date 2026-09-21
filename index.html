@@ -1718,7 +1718,7 @@ function renderCalendar() {
     button.className = "calendar-day";
     button.textContent = day;
 
-    if (availableDates[dateKey]) {
+    if (window.availableDates[dateKey]) {
 
       button.classList.add("available");
 
@@ -1764,8 +1764,7 @@ function showTimeSlots(dateKey) {
 
   timeSlots.innerHTML = "";
 
-  const times = availableDates[dateKey] || [];
-
+const times = window.availableDates[dateKey] || [];
   times.forEach(time => {
 
     const button = document.createElement("button");
