@@ -640,6 +640,8 @@ saveAvailabilityBtn.addEventListener("click", async () => {
 });
     /* LOAD AVAILABILITY */
 
+/* LOAD AVAILABILITY */
+
 async function loadAvailabilityList() {
 
   const availabilityList =
@@ -663,67 +665,69 @@ async function loadAvailabilityList() {
       return;
     }
 
-   snapshot.forEach((availabilityDoc) => {
+    snapshot.forEach((availabilityDoc) => {
 
-  const data = availabilityDoc.data();
+      const data = availabilityDoc.data();
 
-  const card =
-    document.createElement("div");
+      const card =
+        document.createElement("div");
 
-  card.className = "booking-card";
+      card.className = "booking-card";
 
-  card.innerHTML = `
-    <h3>📅 ${data.date}</h3>
+      card.innerHTML = `
+        <h3>📅 ${data.date}</h3>
 
-    <p>
-      <strong>Available Times:</strong>
-      ${data.times.join(", ")}
-    </p>
+        <p>
+          <strong>Available Times:</strong>
+          ${data.times.join(", ")}
+        </p>
 
-    <button class="remove-availability-btn">
-      🗑️ Remove
-    </button>
-  `;
+        <button class="remove-availability-btn">
+          🗑️ Remove
+        </button>
+      `;
 
-  availabilityList.appendChild(card);
+      availabilityList.appendChild(card);
 
-  const removeBtn =
-    card.querySelector(".remove-availability-btn");
+      const removeBtn =
+        card.querySelector(".remove-availability-btn");
 
-  removeBtn.addEventListener("click", async () => {
+      removeBtn.addEventListener("click", async () => {
 
-    const confirmed =
-      confirm(
-        `Remove availability for ${data.date}?`
-      );
+        const confirmed =
+          confirm(
+            `Remove availability for ${data.date}?`
+          );
 
-    if (!confirmed) return;
+        if (!confirmed) return;
 
-    try {
+        try {
 
-      await updateDoc(
-        doc(db, "availability", availabilityDoc.id),
-        {
-          active: false
+          await updateDoc(
+            doc(db, "availability", availabilityDoc.id),
+            {
+              active: false
+            }
+          );
+
+          alert("Availability removed. 💜");
+
+          await loadAvailabilityList();
+
+        } catch (error) {
+
+          console.error(
+            "Remove availability error:",
+            error
+          );
+
+          alert("Could not remove availability.");
+
         }
-      );
 
-      alert("Availability removed. 💜");
+      });
 
-      loadAvailabilityList();
-
-    } catch (error) {
-
-      console.error(
-        "Remove availability error:",
-        error
-      );
-
-      alert("Could not remove availability.");
-
-    }
-
-  });
+    });
 
   } catch (error) {
 
@@ -734,11 +738,7 @@ async function loadAvailabilityList() {
 
     availabilityList.innerHTML =
       '<p class="error">Unable to load availability.</p>';
+
   }
+
 }
-
-    
-  </script>
-
-</body>
-</html>
