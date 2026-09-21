@@ -113,6 +113,26 @@
       font-size: 13px;
       font-weight: bold;
     }
+    .booking-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    
+    .confirm-btn {
+      background: #8b4bb3;
+      color: white;
+    }
+    
+    .decline-btn {
+      background: #eee;
+      color: #333;
+    }
+    
+    .confirm-btn:hover,
+    .decline-btn:hover {
+      opacity: 0.85;
+    }
 
     .hidden {
       display: none;
@@ -211,12 +231,13 @@
       "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
     import {
-      getFirestore,
-      collection,
-      getDocs
-    } from
-      "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
+        getFirestore,
+        collection,
+        getDocs,
+        updateDoc,
+        doc
+      } from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyALsnVzZpzxIyPzKs__Vmtb-xvN3LfJ-TU",
@@ -353,53 +374,114 @@
 
           card.innerHTML = `
             <h3>${booking.name || "Customer"}</h3>
-
+          
             <div class="booking-info">
-
+          
               <strong>Phone:</strong>
               ${booking.phone || "N/A"}
               <br>
-
+          
               <strong>Service:</strong>
               ${booking.service || "N/A"}
               <br>
-
+          
               <strong>Appointment Type:</strong>
               ${booking.appointmentType || "N/A"}
               <br>
-
+          
               <strong>Date:</strong>
               ${booking.date || "N/A"}
               <br>
-
+          
               <strong>Time:</strong>
               ${booking.time || "N/A"}
               <br>
-
+          
               <strong>Details:</strong>
               ${booking.details || "None"}
-
+          
               <br>
-
+          
               <span class="status">
                 ${booking.status || "pending"}
               </span>
-
+          
+            </div>
+          
+            <div class="booking-actions">
+          
+              <button class="confirm-btn">
+                ✅ Confirm
+              </button>
+          
+              <button class="decline-btn">
+                ❌ Decline
+              </button>
+          
             </div>
           `;
 
+          
           bookingsList.appendChild(card);
 
         });
 
-      } catch (error) {
+     const confirmBtn = card.querySelector(".confirm-btn");
+const declineBtn = card.querySelector(".decline-btn");
 
-        console.error(error);
+confirmBtn.addEventListener("click", async () => {
+  try {
 
-        bookingsList.innerHTML =
-          '<p class="error">Unable to load bookings.</p>';
-
+    await updateDoc(
+      doc(db, "bookings", doc.id),
+      {
+        status: "confirmed"
       }
+    );
+
+    alert("Booking confirmed! 💜");
+
+    loadBookings();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Could not confirm this booking.");
+
+  }
+});
+
+
+declineBtn.addEventListener("click", async () => {
+
+  const confirmed =
+    confirm("Are you sure you want to decline this booking?");
+
+  if (!confirmed) return;
+
+  try {
+
+    await updateDoc(
+      doc(db, "bookings", doc.id),
+      {
+        status: "declined"
+      }
+    );
+
+    alert("Booking declined.");
+
+    loadBookings();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Could not decline this booking.");
+
+  }
+
+});
 
     }
 
