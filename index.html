@@ -1610,37 +1610,36 @@
   window.db = getFirestore(app);
   window.addDoc = addDoc;
   window.collection = collection;
-  async function loadAvailability() {
-
+  
+ async function loadAvailability() {
   try {
-
-    const snapshot =
-      await getDocs(collection(window.db, "availability"));
+    const snapshot = await getDocs(
+      collection(window.db, "availability")
+    );
 
     window.availableDates = {};
 
     snapshot.forEach((availabilityDoc) => {
-
       const data = availabilityDoc.data();
 
-      if (data.active === true && data.date && data.times) {
-
+      if (
+        data.active === true &&
+        data.date &&
+        Array.isArray(data.times)
+      ) {
         window.availableDates[data.date] = data.times;
-
       }
-
     });
 
-    if (typeof renderCalendar === "function") {
-      renderCalendar();
-    }
+    console.log("Firebase availability:", window.availableDates);
+
+    renderCalendar();
 
   } catch (error) {
-
     console.error("Availability loading error:", error);
-
   }
 }
+
 
 loadAvailability();
 </script>
@@ -1807,8 +1806,8 @@ document.getElementById("nextMonth").addEventListener("click", () => {
 
 });
 
-renderCalendar();
-    /* =========================
+loadAvailability();
+/* =========================
    STYLE SLIDESHOW
 ========================= */
 
