@@ -1617,7 +1617,8 @@
       collection(window.db, "availability")
     );
 
-    window.availableDates = {};
+    // Firebase now stores BLOCKED dates/times
+    window.blockedDates = {};
 
     snapshot.forEach((availabilityDoc) => {
       const data = availabilityDoc.data();
@@ -1627,16 +1628,20 @@
         data.date &&
         Array.isArray(data.times)
       ) {
-        window.availableDates[data.date] = data.times;
+        window.blockedDates[data.date] = data.times;
       }
     });
 
-    console.log("Firebase availability:", window.availableDates);
+    console.log("Firebase blocked dates:", window.blockedDates);
 
     renderCalendar();
 
   } catch (error) {
-    console.error("Availability loading error:", error);
+    console.error("Blocked dates loading error:", error);
+
+    window.blockedDates = {};
+
+    renderCalendar();
   }
 }
 
