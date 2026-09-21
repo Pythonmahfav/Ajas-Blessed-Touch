@@ -390,11 +390,14 @@
       if (user) {
 
         loginSection.classList.add("hidden");
-
+      
         dashboardSection.classList.remove("hidden");
-
+      
         await loadBookings();
-
+      
+        await loadAvailabilityList();
+      
+      }
       } else {
 
         loginSection.classList.remove("hidden");
@@ -627,6 +630,64 @@ saveAvailabilityBtn.addEventListener("click", async () => {
   }
 
 });
+    /* LOAD AVAILABILITY */
+
+async function loadAvailabilityList() {
+
+  const availabilityList =
+    document.getElementById("availabilityList");
+
+  availabilityList.innerHTML =
+    '<p class="empty">Loading availability...</p>';
+
+  try {
+
+    const snapshot =
+      await getDocs(collection(db, "availability"));
+
+    availabilityList.innerHTML = "";
+
+    if (snapshot.empty) {
+
+      availabilityList.innerHTML =
+        '<p class="empty">No availability added yet.</p>';
+
+      return;
+    }
+
+    snapshot.forEach((availabilityDoc) => {
+
+      const data = availabilityDoc.data();
+
+      const card =
+        document.createElement("div");
+
+      card.className = "booking-card";
+
+      card.innerHTML = `
+        <h3>📅 ${data.date}</h3>
+
+        <p>
+          <strong>Available Times:</strong>
+          ${data.times.join(", ")}
+        </p>
+      `;
+
+      availabilityList.appendChild(card);
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      "Load availability error:",
+      error
+    );
+
+    availabilityList.innerHTML =
+      '<p class="error">Unable to load availability.</p>';
+  }
+}
 
     
   </script>
