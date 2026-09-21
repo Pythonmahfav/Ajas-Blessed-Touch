@@ -1611,13 +1611,12 @@
   window.addDoc = addDoc;
   window.collection = collection;
   
- async function loadAvailability() {
+ window.loadAvailability = async function() {
   try {
     const snapshot = await getDocs(
       collection(window.db, "availability")
     );
 
-    // Firebase now stores BLOCKED dates/times
     window.blockedDates = {};
 
     snapshot.forEach((availabilityDoc) => {
@@ -1634,21 +1633,17 @@
 
     console.log("Firebase blocked dates:", window.blockedDates);
 
-    renderCalendar();
+    // Tell the calendar Firebase data is ready
+    window.dispatchEvent(new Event("firebaseAvailabilityReady"));
 
   } catch (error) {
     console.error("Blocked dates loading error:", error);
 
     window.blockedDates = {};
 
-    renderCalendar();
-
-    if (window.db) {
-      loadAvailability();
-    }
+    window.dispatchEvent(new Event("firebaseAvailabilityReady"));
   }
-}
-
+};
 </script>
 
 <script>
