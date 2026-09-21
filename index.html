@@ -1655,6 +1655,11 @@ loadAvailability();
    APPOINTMENT CALENDAR
    ========================= */
 
+<script>
+/* =========================
+   APPOINTMENT CALENDAR
+========================= */
+
 const calendar = document.getElementById("calendar");
 const calendarMonth = document.getElementById("calendarMonth");
 const selectedDateDisplay = document.getElementById("selectedDate");
@@ -1665,19 +1670,15 @@ const timeInput = document.getElementById("time");
 let currentMonth = new Date();
 let selectedDate = null;
 
-/*
-  TEMPORARY AVAILABILITY
 
-  These dates are examples for testing.
-  We will replace this with the owner's
-  real availability in Step 2.
-*/
-
-window.availableDates = {};
+/* =========================
+   CALENDAR
+========================= */
 
 function formatDate(year, month, day) {
   return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
+
 
 function renderCalendar() {
 
@@ -1694,9 +1695,17 @@ function renderCalendar() {
     year: "numeric"
   });
 
+
+  /* DAY NAMES */
+
   const dayNames = [
-    "Sun", "Mon", "Tue", "Wed",
-    "Thu", "Fri", "Sat"
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
   ];
 
   dayNames.forEach(day => {
@@ -1711,11 +1720,17 @@ function renderCalendar() {
 
   });
 
+
+  /* MONTH INFORMATION */
+
   const firstDay =
     new Date(year, month, 1).getDay();
 
   const daysInMonth =
     new Date(year, month + 1, 0).getDate();
+
+
+  /* EMPTY DAYS BEFORE MONTH */
 
   for (let i = 0; i < firstDay; i++) {
 
@@ -1729,7 +1744,13 @@ function renderCalendar() {
 
   }
 
+
+  /* CREATE DAYS */
+
   for (let day = 1; day <= daysInMonth; day++) {
+
+    const dateKey =
+      formatDate(year, month, day);
 
     const button =
       document.createElement("button");
@@ -1741,8 +1762,8 @@ function renderCalendar() {
 
     button.textContent = day;
 
-    const dateKey =
-      `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+    /* CHECK IF DATE IS IN THE PAST */
 
     const today = new Date();
 
@@ -1753,7 +1774,7 @@ function renderCalendar() {
 
     thisDate.setHours(0, 0, 0, 0);
 
-    // Don't allow dates in the past
+
     if (thisDate < today) {
 
       button.classList.add("unavailable");
@@ -1762,17 +1783,22 @@ function renderCalendar() {
 
     } else {
 
-      // All future dates are available by default
+      /*
+        ALL FUTURE DATES ARE AVAILABLE
+        UNLESS WE LATER BLOCK THEM
+      */
+
       button.classList.add("available");
+
 
       button.addEventListener("click", () => {
 
         selectedDate = dateKey;
 
         document.querySelectorAll(".calendar-day")
-          .forEach(dayButton =>
-            dayButton.classList.remove("selected")
-          );
+          .forEach(dayButton => {
+            dayButton.classList.remove("selected");
+          });
 
         button.classList.add("selected");
 
@@ -1794,54 +1820,19 @@ function renderCalendar() {
 
     }
 
+
     calendar.appendChild(button);
 
   }
 
 }
-  for (let day = 1; day <= daysInMonth; day++) {
 
-    const dateKey = formatDate(year, month, day);
 
-    const button = document.createElement("button");
+/* =========================
+   TIME SLOTS
+========================= */
 
-    button.type = "button";
-    button.className = "calendar-day";
-    button.textContent = day;
-
-    // All future dates are available by default
-    button.classList.add("available");
-    
-    button.addEventListener("click", () => {
-    
-      selectedDate = dateKey;
-    
-      document.querySelectorAll(".calendar-day")
-        .forEach(dayButton =>
-          dayButton.classList.remove("selected")
-        );
-    
-      button.classList.add("selected");
-    
-      dateInput.value = dateKey;
-    
-      selectedDateDisplay.textContent =
-        `Selected date: ${new Date(
-          dateKey + "T12:00:00"
-        ).toLocaleDateString("en-US", {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-          year: "numeric"
-        })}`;
-    
-      showTimeSlots(dateKey);
-    
-    });
-    
-    calendar.appendChild(button);
-    
-  function showTimeSlots(dateKey) {
+function showTimeSlots(dateKey) {
 
   timeSlots.innerHTML = "";
 
@@ -1856,26 +1847,43 @@ function renderCalendar() {
     "4:00 PM"
   ];
 
-  const blockedTimes = window.blockedDates?.[dateKey] || [];
 
-  const times = defaultTimes.filter(
-    time => !blockedTimes.includes(time)
-  );
+  /* GET BLOCKED TIMES FROM FIREBASE */
+
+  const blockedTimes =
+    window.blockedDates?.[dateKey] || [];
+
+
+  /* REMOVE BLOCKED TIMES */
+
+  const times =
+    defaultTimes.filter(
+      time => !blockedTimes.includes(time)
+    );
+
+
+  /* SHOW TIME BUTTONS */
 
   times.forEach(time => {
 
-    const button = document.createElement("button");
+    const button =
+      document.createElement("button");
 
     button.type = "button";
-    button.className = "time-slot";
-    button.textContent = time;
+
+    button.className =
+      "time-slot";
+
+    button.textContent =
+      time;
+
 
     button.addEventListener("click", () => {
 
       document.querySelectorAll(".time-slot")
-        .forEach(slot =>
-          slot.classList.remove("selected")
-        );
+        .forEach(slot => {
+          slot.classList.remove("selected");
+        });
 
       button.classList.add("selected");
 
@@ -1883,36 +1891,71 @@ function renderCalendar() {
 
     });
 
+
     timeSlots.appendChild(button);
 
   });
 
+
+  /* NO TIMES AVAILABLE */
+
+  if (times.length === 0) {
+
+    timeSlots.innerHTML =
+      "<p>No appointment times available for this date.</p>";
+
+  }
+
 }
 
-document.getElementById("prevMonth").addEventListener("click", () => {
 
-  currentMonth.setMonth(currentMonth.getMonth() - 1);
+/* =========================
+   MONTH BUTTONS
+========================= */
 
-  renderCalendar();
+document.getElementById("prevMonth")
+  .addEventListener("click", () => {
 
-});
+    currentMonth.setMonth(
+      currentMonth.getMonth() - 1
+    );
 
-document.getElementById("nextMonth").addEventListener("click", () => {
+    renderCalendar();
 
-  currentMonth.setMonth(currentMonth.getMonth() + 1);
+  });
 
-  renderCalendar();
 
-});
+document.getElementById("nextMonth")
+  .addEventListener("click", () => {
 
-loadAvailability();
+    currentMonth.setMonth(
+      currentMonth.getMonth() + 1
+    );
+
+    renderCalendar();
+
+  });
+
+
+/* =========================
+   START CALENDAR
+========================= */
+
+renderCalendar();
+
+
 /* =========================
    STYLE SLIDESHOW
 ========================= */
 
 let currentSlide = 0;
-const slides = document.querySelectorAll(".slide");
-const dots = document.querySelectorAll(".dot");
+
+const slides =
+  document.querySelectorAll(".slide");
+
+const dots =
+  document.querySelectorAll(".dot");
+
 
 function showSlide(index) {
 
@@ -1933,62 +1976,143 @@ function showSlide(index) {
   });
 
   slides[currentSlide].classList.add("active");
+
   dots[currentSlide].classList.add("active-dot");
+
 }
+
 
 function changeSlide(direction) {
+
   currentSlide += direction;
+
   showSlide(currentSlide);
+
 }
 
-/* Automatically change every 4 seconds */
 
 setInterval(() => {
+
   currentSlide++;
+
   showSlide(currentSlide);
+
 }, 4000);
-    const serviceSelect = document.getElementById('service');
 
-    document.querySelectorAll('.choose-service').forEach(button => {
-      button.addEventListener('click', () => {
-        const selected = button.dataset.service;
-        [...serviceSelect.options].forEach((option, index) => {
-          if(option.textContent.startsWith(selected)) serviceSelect.selectedIndex = index;
+
+/* =========================
+   SERVICE SELECTION
+========================= */
+
+const serviceSelect =
+  document.getElementById("service");
+
+
+document.querySelectorAll(".choose-service")
+  .forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const selected =
+        button.dataset.service;
+
+      [...serviceSelect.options]
+        .forEach((option, index) => {
+
+          if (
+            option.textContent
+              .startsWith(selected)
+          ) {
+
+            serviceSelect.selectedIndex =
+              index;
+
+          }
+
         });
-        document.getElementById('booking').scrollIntoView({behavior:'smooth'});
-      });
+
+      document
+        .getElementById("booking")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
     });
 
-  document.getElementById('bookingForm').addEventListener('submit', async function(event) {
-  event.preventDefault();
+  });
 
-  const name = document.getElementById('name').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const service = serviceSelect.value;
-  const appointmentType = document.getElementById('appointmentType').value;
-  const date = document.getElementById('date').value;
-  const time = document.getElementById('time').value;
-  const details = document.getElementById('details').value.trim() || 'No additional details';
 
-  if (!date || !time) {
-    alert('Please select an appointment date and time.');
-    return;
-  }
+/* =========================
+   BOOKING FORM
+========================= */
 
-  try {
-    await window.addDoc(window.collection(window.db, "bookings"), {
-      name: name,
-      phone: phone,
-      service: service,
-      appointmentType: appointmentType,
-      date: date,
-      time: time,
-      details: details,
-      status: "pending",
-      createdAt: new Date().toISOString()
-    });
+document
+  .getElementById("bookingForm")
+  .addEventListener("submit", async function(event) {
 
-    const message =
+    event.preventDefault();
+
+    const name =
+      document.getElementById("name")
+        .value.trim();
+
+    const phone =
+      document.getElementById("phone")
+        .value.trim();
+
+    const service =
+      serviceSelect.value;
+
+    const appointmentType =
+      document.getElementById("appointmentType")
+        .value;
+
+    const date =
+      dateInput.value;
+
+    const time =
+      timeInput.value;
+
+    const details =
+      document.getElementById("details")
+        .value.trim() ||
+      "No additional details";
+
+
+    if (!date || !time) {
+
+      alert(
+        "Please select an appointment date and time."
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      await window.addDoc(
+        window.collection(
+          window.db,
+          "bookings"
+        ),
+        {
+          name: name,
+          phone: phone,
+          service: service,
+          appointmentType: appointmentType,
+          date: date,
+          time: time,
+          details: details,
+          status: "pending",
+          createdAt:
+            new Date().toISOString()
+        }
+      );
+
+
+      const message =
 `Hello Ajas Blessed Touch!
 
 I would like to request an appointment.
@@ -2005,14 +2129,26 @@ ${details}
 
 Please confirm availability.`;
 
-    window.location.href =
-      `https://wa.me/19295820780?text=${encodeURIComponent(message)}`;
 
-  } catch (error) {
-    console.error("Booking error:", error);
-    alert("Something went wrong saving your booking. Please try again.");
-  }
-});
-  </script>
+      window.location.href =
+        `https://wa.me/19295820780?text=${encodeURIComponent(message)}`;
+
+
+    } catch (error) {
+
+      console.error(
+        "Booking error:",
+        error
+      );
+
+      alert(
+        "Something went wrong saving your booking. Please try again."
+      );
+
+    }
+
+  });
+
+</script>
 </body>
 </html>
