@@ -489,13 +489,13 @@
         <div class="booking-actions">
 
           <button class="confirm-btn">
-            ✅ Confirm
+            ${booking.status === "confirmed" ? "✅ Confirmed" : "✅ Confirm"}
           </button>
-
+        
           <button class="decline-btn">
-            ❌ Decline
+            ${booking.status === "declined" ? "❌ Declined" : "❌ Decline"}
           </button>
-
+        
         </div>
       `;
 
