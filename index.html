@@ -1642,11 +1642,13 @@
     window.blockedDates = {};
 
     renderCalendar();
+
+    if (window.db) {
+      loadAvailability();
+    }
   }
 }
 
-
-loadAvailability();
 </script>
 
 <script>
