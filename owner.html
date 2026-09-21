@@ -609,13 +609,13 @@ saveAvailabilityBtn.addEventListener("click", async () => {
 
   if (!date) {
     availabilityMessage.textContent =
-      "Please choose a date.";
+      "Please choose a date to block.";
     return;
   }
 
   if (selectedTimes.length === 0) {
     availabilityMessage.textContent =
-      "Please select at least one time.";
+      "Please select at least one time to block.";
     return;
   }
 
@@ -631,14 +631,25 @@ saveAvailabilityBtn.addEventListener("click", async () => {
     );
 
     availabilityMessage.textContent =
-      "Availability saved successfully! 💜";
+      "Blocked times saved successfully! 💜";
+
+    // Clear the form
+    document.getElementById("availabilityDate").value = "";
+
+    document.querySelectorAll(
+      ".availability-times input[type='checkbox']"
+    ).forEach(checkbox => {
+      checkbox.checked = false;
+    });
+
+    loadAvailability();
 
   } catch (error) {
 
-    console.error("Save availability error:", error);
+    console.error("Save blocked times error:", error);
 
     availabilityMessage.textContent =
-      "Could not save availability.";
+      "Could not block those times.";
 
   }
 
