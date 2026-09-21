@@ -1754,7 +1754,7 @@ function renderCalendar() {
     
     calendar.appendChild(button);
     
-   function showTimeSlots(dateKey) {
+  function showTimeSlots(dateKey) {
 
   timeSlots.innerHTML = "";
 
@@ -1769,11 +1769,12 @@ function renderCalendar() {
     "4:00 PM"
   ];
 
-const blockedTimes = window.blockedDates?.[dateKey] || [];
+  const blockedTimes = window.blockedDates?.[dateKey] || [];
 
-const times = defaultTimes.filter(
-  time => !blockedTimes.includes(time)
-);
+  const times = defaultTimes.filter(
+    time => !blockedTimes.includes(time)
+  );
+
   times.forEach(time => {
 
     const button = document.createElement("button");
@@ -1799,10 +1800,6 @@ const times = defaultTimes.filter(
 
   });
 
-}
-    timeSlots.appendChild(button);
-
-  });
 }
 
 document.getElementById("prevMonth").addEventListener("click", () => {
