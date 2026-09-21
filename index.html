@@ -1717,54 +1717,44 @@ function renderCalendar() {
     button.className = "calendar-day";
     button.textContent = day;
 
-    if (window.availableDates[dateKey]) {
-
-      button.classList.add("available");
-
-      button.addEventListener("click", () => {
-
-        selectedDate = dateKey;
-
-        document.querySelectorAll(".calendar-day")
-          .forEach(dayButton =>
-            dayButton.classList.remove("selected")
-          );
-
-        button.classList.add("selected");
-
-        dateInput.value = dateKey;
-
-        selectedDateDisplay.textContent =
-          `Selected date: ${new Date(
-            dateKey + "T12:00:00"
-          ).toLocaleDateString("en-US", {
-            weekday: "long",
-            month: "long",
-            day: "numeric",
-            year: "numeric"
-          })}`;
-
-        showTimeSlots(dateKey);
-
-      });
-
-    } else {
-
-      button.classList.add("unavailable");
-      button.disabled = true;
-
-    }
-
+    // All future dates are available by default
+    button.classList.add("available");
+    
+    button.addEventListener("click", () => {
+    
+      selectedDate = dateKey;
+    
+      document.querySelectorAll(".calendar-day")
+        .forEach(dayButton =>
+          dayButton.classList.remove("selected")
+        );
+    
+      button.classList.add("selected");
+    
+      dateInput.value = dateKey;
+    
+      selectedDateDisplay.textContent =
+        `Selected date: ${new Date(
+          dateKey + "T12:00:00"
+        ).toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        })}`;
+    
+      showTimeSlots(dateKey);
+    
+    });
+    
     calendar.appendChild(button);
-  }
-}
-
-function showTimeSlots(dateKey) {
-
-  timeSlots.innerHTML = "";
-
-const times = window.availableDates[dateKey] || [];
-  times.forEach(time => {
+    
+    function showTimeSlots(dateKey) {
+    
+      timeSlots.innerHTML = "";
+    
+    const times = window.availableDates[dateKey] || [];
+      times.forEach(time => {
 
     const button = document.createElement("button");
 
