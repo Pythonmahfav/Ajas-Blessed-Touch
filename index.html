@@ -1590,8 +1590,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
   const firebaseConfig = {
     apiKey: "AIzaSyALsnVzZpzxIyPzKs__Vmtb-xvN3LfJ-TU",
     authDomain: "ajas-blessed-touch.firebaseapp.com",
@@ -1603,8 +1602,10 @@
   };
 
   const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-</script>
+  
+  window.db = getFirestore(app);
+  window.addDoc = addDoc;
+  window.collection = collection;</script>
 
 <script>
 
@@ -1828,18 +1829,36 @@ setInterval(() => {
       });
     });
 
-    document.getElementById('bookingForm').addEventListener('submit', function(event){
-      event.preventDefault();
+   document.getElementById('bookingForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
 
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const service = serviceSelect.value;
-      const appointmentType = document.getElementById('appointmentType').value;
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
-      const details = document.getElementById('details').value.trim() || 'No additional details';
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const service = serviceSelect.value;
+  const appointmentType = document.getElementById('appointmentType').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const details = document.getElementById('details').value.trim() || 'No additional details';
 
-      const message =
+  if (!date || !time) {
+    alert('Please select an appointment date and time.');
+    return;
+  }
+
+  try {
+await window.addDoc(window.collection(window.db, "bookings"), {
+      name: name,
+      phone: phone,
+      service: service,
+      appointmentType: appointmentType,
+      date: date,
+      time: time,
+      details: details,
+      status: "pending",
+      createdAt: new Date().toISOString()done 
+    });
+
+    const message =
 `Hello Ajas Blessed Touch!
 
 I would like to request an appointment.
@@ -1856,7 +1875,14 @@ ${details}
 
 Please confirm availability.`;
 
-window.location.href = `https://wa.me/19295820780?text=${encodeURIComponent(message)}`;    });
+    window.location.href =
+      `https://wa.me/19295820780?text=${encodeURIComponent(message)}`;
+
+  } catch (error) {
+    console.error("Booking error:", error);
+    alert("Something went wrong saving your booking. Please try again.");
+  }
+}););
   </script>
 </body>
 </html>
