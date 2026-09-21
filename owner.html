@@ -639,7 +639,7 @@ saveAvailabilityBtn.addEventListener("click", async () => {
   }
 
 });
-    /* LOAD AVAILABILITY */
+ /* LOAD AVAILABILITY */
 
 async function loadAvailabilityList() {
 
@@ -656,17 +656,18 @@ async function loadAvailabilityList() {
 
     availabilityList.innerHTML = "";
 
-    if (snapshot.empty) {
-
-      availabilityList.innerHTML =
-        '<p class="empty">No availability added yet.</p>';
-
-      return;
-    }
+    let activeCount = 0;
 
     snapshot.forEach((availabilityDoc) => {
 
       const data = availabilityDoc.data();
+
+      // Don't show removed/inactive dates
+      if (data.active !== true) {
+        return;
+      }
+
+      activeCount++;
 
       const card =
         document.createElement("div");
@@ -678,7 +679,7 @@ async function loadAvailabilityList() {
 
         <p>
           <strong>Available Times:</strong>
-          ${data.times.join(", ")}
+          ${(data.times || []).join(", ")}
         </p>
 
         <button class="remove-availability-btn">
@@ -728,6 +729,13 @@ async function loadAvailabilityList() {
 
     });
 
+    if (activeCount === 0) {
+
+      availabilityList.innerHTML =
+        '<p class="empty">No availability added yet.</p>';
+
+    }
+
   } catch (error) {
 
     console.error(
@@ -739,7 +747,6 @@ async function loadAvailabilityList() {
       '<p class="error">Unable to load availability.</p>';
 
   }
-
 }
 
   </script>
