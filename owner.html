@@ -190,6 +190,69 @@
   <!-- DASHBOARD -->
   <div id="dashboardSection" class="dashboard hidden">
 
+    <div class="availability-manager">
+
+  <h2>📅 Manage Availability</h2>
+
+  <p>Add the dates and times you are available for appointments.</p>
+
+  <label for="availabilityDate">Available Date</label>
+  <input type="date" id="availabilityDate">
+
+  <h3>Available Times</h3>
+
+  <div class="availability-times">
+
+    <label>
+      <input type="checkbox" value="9:00 AM">
+      9:00 AM
+    </label>
+
+    <label>
+      <input type="checkbox" value="10:00 AM">
+      10:00 AM
+    </label>
+
+    <label>
+      <input type="checkbox" value="11:00 AM">
+      11:00 AM
+    </label>
+
+    <label>
+      <input type="checkbox" value="12:00 PM">
+      12:00 PM
+    </label>
+
+    <label>
+      <input type="checkbox" value="1:00 PM">
+      1:00 PM
+    </label>
+
+    <label>
+      <input type="checkbox" value="2:00 PM">
+      2:00 PM
+    </label>
+
+    <label>
+      <input type="checkbox" value="3:00 PM">
+      3:00 PM
+    </label>
+
+    <label>
+      <input type="checkbox" value="4:00 PM">
+      4:00 PM
+    </label>
+
+  </div>
+
+  <button type="button" id="saveAvailabilityBtn">
+    💾 Save Availability
+  </button>
+
+  <p id="availabilityMessage"></p>
+
+</div>
+
     <div class="top-bar">
 
       <div>
@@ -230,15 +293,16 @@
     } from
       "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
-    import {
-        getFirestore,
-        collection,
-        getDocs,
-        updateDoc,
-        doc
-      } from
-        "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
+   import {
+    getFirestore,
+    collection,
+    getDocs,
+    updateDoc,
+    doc,
+    setDoc
+  } from
+    "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+    
     const firebaseConfig = {
       apiKey: "AIzaSyALsnVzZpzxIyPzKs__Vmtb-xvN3LfJ-TU",
       authDomain: "ajas-blessed-touch.firebaseapp.com",
@@ -502,6 +566,66 @@
 
 }
 
+    /* SAVE AVAILABILITY */
+
+const saveAvailabilityBtn =
+  document.getElementById("saveAvailabilityBtn");
+
+const availabilityMessage =
+  document.getElementById("availabilityMessage");
+
+saveAvailabilityBtn.addEventListener("click", async () => {
+
+  const date =
+    document.getElementById("availabilityDate").value;
+
+  const selectedTimes =
+    Array.from(
+      document.querySelectorAll(
+        ".availability-times input[type='checkbox']:checked"
+      )
+    ).map(checkbox => checkbox.value);
+
+  availabilityMessage.textContent = "";
+
+  if (!date) {
+    availabilityMessage.textContent =
+      "Please choose a date.";
+    return;
+  }
+
+  if (selectedTimes.length === 0) {
+    availabilityMessage.textContent =
+      "Please select at least one time.";
+    return;
+  }
+
+  try {
+
+    await setDoc(
+      doc(db, "availability", date),
+      {
+        date: date,
+        times: selectedTimes,
+        active: true
+      }
+    );
+
+    availabilityMessage.textContent =
+      "Availability saved successfully! 💜";
+
+  } catch (error) {
+
+    console.error("Save availability error:", error);
+
+    availabilityMessage.textContent =
+      "Could not save availability.";
+
+  }
+
+});
+
+    
   </script>
 
 </body>
