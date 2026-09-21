@@ -2134,6 +2134,17 @@ Please confirm availability.`;
 
   });
 
+  /* =========================
+   START CALENDAR
+========================= */
+
+renderCalendar();
+
+window.addEventListener("firebaseAvailabilityReady", () => {
+  renderCalendar();
+});
+
 </script>
+  
 </body>
 </html>
