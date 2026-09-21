@@ -341,145 +341,166 @@
 
     /* LOAD BOOKINGS */
 
-    async function loadBookings() {
+   async function loadBookings() {
+
+  bookingsList.innerHTML =
+    '<p class="empty">Loading bookings...</p>';
+
+  try {
+
+    const snapshot =
+      await getDocs(collection(db, "bookings"));
+
+    bookingsList.innerHTML = "";
+
+    if (snapshot.empty) {
 
       bookingsList.innerHTML =
-        '<p class="empty">Loading bookings...</p>';
+        '<p class="empty">No appointments yet.</p>';
 
-      try {
+      return;
 
-        const snapshot =
-          await getDocs(collection(db, "bookings"));
+    }
 
-        bookingsList.innerHTML = "";
+    snapshot.forEach((bookingDoc) => {
 
-        if (snapshot.empty) {
+      const booking = bookingDoc.data();
 
-          bookingsList.innerHTML =
-            '<p class="empty">No appointments yet.</p>';
+      const card =
+        document.createElement("div");
 
-          return;
+      card.className = "booking-card";
+
+      card.innerHTML = `
+        <h3>${booking.name || "Customer"}</h3>
+
+        <div class="booking-info">
+
+          <strong>Phone:</strong>
+          ${booking.phone || "N/A"}
+          <br>
+
+          <strong>Service:</strong>
+          ${booking.service || "N/A"}
+          <br>
+
+          <strong>Appointment Type:</strong>
+          ${booking.appointmentType || "N/A"}
+          <br>
+
+          <strong>Date:</strong>
+          ${booking.date || "N/A"}
+          <br>
+
+          <strong>Time:</strong>
+          ${booking.time || "N/A"}
+          <br>
+
+          <strong>Details:</strong>
+          ${booking.details || "None"}
+
+          <br>
+
+          <span class="status">
+            ${booking.status || "pending"}
+          </span>
+
+        </div>
+
+        <div class="booking-actions">
+
+          <button class="confirm-btn">
+            ✅ Confirm
+          </button>
+
+          <button class="decline-btn">
+            ❌ Decline
+          </button>
+
+        </div>
+      `;
+
+      bookingsList.appendChild(card);
+
+
+      /* CONFIRM BOOKING */
+
+      const confirmBtn =
+        card.querySelector(".confirm-btn");
+
+      confirmBtn.addEventListener("click", async () => {
+
+        try {
+
+          await updateDoc(
+            doc(db, "bookings", bookingDoc.id),
+            {
+              status: "confirmed"
+            }
+          );
+
+          alert("Booking confirmed! 💜");
+
+          loadBookings();
+
+        } catch (error) {
+
+          console.error("Confirm error:", error);
+
+          alert("Could not confirm this booking.");
 
         }
 
+      });
 
-        snapshot.forEach((doc) => {
 
-          const booking = doc.data();
+      /* DECLINE BOOKING */
 
-          const card =
-            document.createElement("div");
+      const declineBtn =
+        card.querySelector(".decline-btn");
 
-          card.className = "booking-card";
+      declineBtn.addEventListener("click", async () => {
 
-          card.innerHTML = `
-            <h3>${booking.name || "Customer"}</h3>
-          
-            <div class="booking-info">
-          
-              <strong>Phone:</strong>
-              ${booking.phone || "N/A"}
-              <br>
-          
-              <strong>Service:</strong>
-              ${booking.service || "N/A"}
-              <br>
-          
-              <strong>Appointment Type:</strong>
-              ${booking.appointmentType || "N/A"}
-              <br>
-          
-              <strong>Date:</strong>
-              ${booking.date || "N/A"}
-              <br>
-          
-              <strong>Time:</strong>
-              ${booking.time || "N/A"}
-              <br>
-          
-              <strong>Details:</strong>
-              ${booking.details || "None"}
-          
-              <br>
-          
-              <span class="status">
-                ${booking.status || "pending"}
-              </span>
-          
-            </div>
-          
-            <div class="booking-actions">
-          
-              <button class="confirm-btn">
-                ✅ Confirm
-              </button>
-          
-              <button class="decline-btn">
-                ❌ Decline
-              </button>
-          
-            </div>
-          `;
+        const confirmed =
+          confirm("Are you sure you want to decline this booking?");
 
-          
-          bookingsList.appendChild(card);
+        if (!confirmed) return;
 
-        });
+        try {
 
-     const confirmBtn = card.querySelector(".confirm-btn");
-const declineBtn = card.querySelector(".decline-btn");
+          await updateDoc(
+            doc(db, "bookings", bookingDoc.id),
+            {
+              status: "declined"
+            }
+          );
 
-confirmBtn.addEventListener("click", async () => {
-  try {
+          alert("Booking declined.");
 
-    await updateDoc(
-      doc(db, "bookings", doc.id),
-      {
-        status: "confirmed"
-      }
-    );
+          loadBookings();
 
-    alert("Booking confirmed! 💜");
+        } catch (error) {
 
-    loadBookings();
+          console.error("Decline error:", error);
+
+          alert("Could not decline this booking.");
+
+        }
+
+      });
+
+    });
 
   } catch (error) {
 
-    console.error(error);
+    console.error("Load bookings error:", error);
 
-    alert("Could not confirm this booking.");
-
-  }
-});
-
-
-declineBtn.addEventListener("click", async () => {
-
-  const confirmed =
-    confirm("Are you sure you want to decline this booking?");
-
-  if (!confirmed) return;
-
-  try {
-
-    await updateDoc(
-      doc(db, "bookings", doc.id),
-      {
-        status: "declined"
-      }
-    );
-
-    alert("Booking declined.");
-
-    loadBookings();
-
-  } catch (error) {
-
-    console.error(error);
-
-    alert("Could not decline this booking.");
+    bookingsList.innerHTML =
+      '<p class="error">Unable to load bookings.</p>';
 
   }
+
+}
 
 });
 
