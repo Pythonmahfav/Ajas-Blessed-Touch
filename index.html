@@ -1605,7 +1605,8 @@
   
   window.db = getFirestore(app);
   window.addDoc = addDoc;
-  window.collection = collection;</script>
+  window.collection = collection;
+</script>
 
 <script>
 
@@ -1829,7 +1830,7 @@ setInterval(() => {
       });
     });
 
-   document.getElementById('bookingForm').addEventListener('submit', async function(event) {
+  document.getElementById('bookingForm').addEventListener('submit', async function(event) {
   event.preventDefault();
 
   const name = document.getElementById('name').value.trim();
@@ -1846,7 +1847,7 @@ setInterval(() => {
   }
 
   try {
-await window.addDoc(window.collection(window.db, "bookings"), {
+    await window.addDoc(window.collection(window.db, "bookings"), {
       name: name,
       phone: phone,
       service: service,
@@ -1855,7 +1856,7 @@ await window.addDoc(window.collection(window.db, "bookings"), {
       time: time,
       details: details,
       status: "pending",
-      createdAt: new Date().toISOString()done 
+      createdAt: new Date().toISOString()
     });
 
     const message =
@@ -1882,7 +1883,7 @@ Please confirm availability.`;
     console.error("Booking error:", error);
     alert("Something went wrong saving your booking. Please try again.");
   }
-}););
+});
   </script>
 </body>
 </html>
