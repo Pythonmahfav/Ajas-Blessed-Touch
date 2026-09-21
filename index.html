@@ -1749,12 +1749,24 @@ function renderCalendar() {
     
     calendar.appendChild(button);
     
-    function showTimeSlots(dateKey) {
-    
-      timeSlots.innerHTML = "";
-    
-    const times = window.availableDates[dateKey] || [];
-      times.forEach(time => {
+   function showTimeSlots(dateKey) {
+
+  timeSlots.innerHTML = "";
+
+  const defaultTimes = [
+    "9:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "1:00 PM",
+    "2:00 PM",
+    "3:00 PM",
+    "4:00 PM"
+  ];
+
+  const times = defaultTimes;
+
+  times.forEach(time => {
 
     const button = document.createElement("button");
 
@@ -1775,6 +1787,11 @@ function renderCalendar() {
 
     });
 
+    timeSlots.appendChild(button);
+
+  });
+
+}
     timeSlots.appendChild(button);
 
   });
