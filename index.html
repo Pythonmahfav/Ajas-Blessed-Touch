@@ -1694,24 +1694,111 @@ function renderCalendar() {
     year: "numeric"
   });
 
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const dayNames = [
+    "Sun", "Mon", "Tue", "Wed",
+    "Thu", "Fri", "Sat"
+  ];
 
   dayNames.forEach(day => {
+
     const heading = document.createElement("div");
+
     heading.className = "calendar-day-name";
+
     heading.textContent = day;
+
     calendar.appendChild(heading);
+
   });
 
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDay =
+    new Date(year, month, 1).getDay();
+
+  const daysInMonth =
+    new Date(year, month + 1, 0).getDate();
 
   for (let i = 0; i < firstDay; i++) {
-    const empty = document.createElement("div");
-    empty.className = "calendar-day empty";
+
+    const empty =
+      document.createElement("div");
+
+    empty.className =
+      "calendar-day empty";
+
     calendar.appendChild(empty);
+
   }
 
+  for (let day = 1; day <= daysInMonth; day++) {
+
+    const button =
+      document.createElement("button");
+
+    button.type = "button";
+
+    button.className =
+      "calendar-day";
+
+    button.textContent = day;
+
+    const dateKey =
+      `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+    const thisDate =
+      new Date(year, month, day);
+
+    thisDate.setHours(0, 0, 0, 0);
+
+    // Don't allow dates in the past
+    if (thisDate < today) {
+
+      button.classList.add("unavailable");
+
+      button.disabled = true;
+
+    } else {
+
+      // All future dates are available by default
+      button.classList.add("available");
+
+      button.addEventListener("click", () => {
+
+        selectedDate = dateKey;
+
+        document.querySelectorAll(".calendar-day")
+          .forEach(dayButton =>
+            dayButton.classList.remove("selected")
+          );
+
+        button.classList.add("selected");
+
+        dateInput.value = dateKey;
+
+        selectedDateDisplay.textContent =
+          `Selected date: ${new Date(
+            dateKey + "T12:00:00"
+          ).toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+          })}`;
+
+        showTimeSlots(dateKey);
+
+      });
+
+    }
+
+    calendar.appendChild(button);
+
+  }
+
+}
   for (let day = 1; day <= daysInMonth; day++) {
 
     const dateKey = formatDate(year, month, day);
