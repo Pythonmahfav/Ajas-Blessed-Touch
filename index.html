@@ -436,22 +436,22 @@
   box-shadow: 0 22px 45px rgba(100,40,130,.20);
 }
 
-.service-image{
-  width:100%;
-  height:240px;
-  object-fit:contain;
-  display:block;
-  background:white;
+.service-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 18px;
 }
 
 .service-image img {
-  display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
   border-radius: 18px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
-
 /*.service:hover .service-image img {
   transform: scale(1.05);*/
 }
@@ -571,23 +571,22 @@
 /* PHONE */
 @media (max-width: 600px) {
   .services-grid {
-    gap: 12px;
+    gap: 14px;
   }
 
   .service-card {
-    margin-bottom: 0;
+    margin: 0;
   }
 
   .service-image {
-    min-height: 200px;
+    height: 220px;
   }
 }
 
 /* LAPTOP / DESKTOP */
 @media (min-width: 1000px) {
   .service-image {
-    height: 260px;
-    overflow: hidden;
+    height: 270px;
   }
 
   .service-image img {
