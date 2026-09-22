@@ -544,9 +544,13 @@
 }
   .service{
   min-height:0 !important;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
 }
 
 .service-image{
+  background:transparent !important;
   height:240px !important;
   min-height:0 !important;
   max-height:240px !important;
@@ -555,8 +559,14 @@
 }
 
 .service-body{
-  padding:20px !important;
+  background:rgba(255,255,255,0.78);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-radius:20px;
+  margin:0 10px 10px;
+  padding:20px;
 }
+  
 /* =========================
    APPOINTMENT CALENDAR
    ========================= */
