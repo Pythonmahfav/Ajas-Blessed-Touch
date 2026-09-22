@@ -586,7 +586,8 @@
 /* LAPTOP / DESKTOP */
 @media (min-width: 1000px) {
   .service-image {
-    height: 270px;
+    height: 260px;
+    overflow: hidden;
   }
 
   .service-image img {
@@ -1090,6 +1091,21 @@
 
   .links {
     font-size: .85rem;
+  }
+}
+  @media (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .service-card {
+    width: 100%;
+    margin: 0;
+  }
+
+  .service-image {
+    width: 100%;
   }
 }
   </style>
