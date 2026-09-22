@@ -414,39 +414,34 @@
       color:var(--muted);
       line-height:1.75;
     }
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-template-columns: 1fr;
-      gap: 24px;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .service {
-      width: 100%;
-      background: rgba(255,255,255,.97);
-      border: 1px solid rgba(172,89,232,.30);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 12px 30px rgba(49,32,20,.12);
-      transition: transform .35s ease, box-shadow .35s ease;
-    }
+   .service-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  width:100%;
+}
+
+.service{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:24px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
 
 .service:hover {
   transform: translateY(-8px);
   box-shadow: 0 22px 45px rgba(100,40,130,.20);
 }
 
-.service-image {
-  width: 100%;
-  height: 240px;
-  overflow: hidden;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.service-image{
+  width:100%;
+  height:240px;
+  object-fit:contain;
+  display:block;
+  background:white;
 }
 
 .service-image img {
@@ -508,26 +503,20 @@
     transform: translateY(-30px) rotate(10deg);
   }
 }
-.service-body {
-  padding: 20px 22px 22px;
-  text-align: center;
+/* SERVICE INFORMATION */
+.service-body{
+  padding:20px 22px 22px;
+  text-align:center;
 }
 
-.service-body h3 {
-  margin: 0 0 12px;
-  font-family: Georgia, serif;
-  font-size: 1.35rem;
-  line-height: 1.2;
-  color: #15120f;
+.service-body h3{
+  margin:0 0 10px;
+  font-size:24px;
 }
 
-.service-body p {
-  margin: 0 0 15px;
-  font-family: Poppins, Arial, sans-serif;
-  font-size: .9rem;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #385d6f;
+.service-body p{
+  margin:0 0 14px;
+  line-height:1.5;
 }
 
 .service-body small {
@@ -552,6 +541,21 @@
 .service .btn-dark:hover {
   background: #ac59e8;
   color: #15120f;
+}
+  .service{
+  min-height:0 !important;
+}
+
+.service-image{
+  height:240px !important;
+  min-height:0 !important;
+  max-height:240px !important;
+  object-fit:contain !important;
+  display:block !important;
+}
+
+.service-body{
+  padding:20px !important;
 }
 /* =========================
    APPOINTMENT CALENDAR
