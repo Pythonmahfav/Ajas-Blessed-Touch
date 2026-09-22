@@ -503,15 +503,21 @@
     transform: translateY(-30px) rotate(10deg);
   }
 }
+    
 /* SERVICE INFORMATION */
 .service-body{
-  padding:20px 22px 22px;
+  background:rgba(255,255,255,0.82);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-radius:18px;
+  margin:0 6px 6px;
+  padding:18px 18px 20px;
   text-align:center;
 }
 
 .service-body h3{
-  margin:0 0 10px;
-  font-size:24px;
+  margin:0 0 8px;
+  font-size:22px;
 }
 
 .service-body p{
@@ -550,12 +556,10 @@
 }
 
 .service-image{
-  background:transparent !important;
-  height:240px !important;
- /* min-height:0 !important;
-  max-height:240px !important;*/
+  height:220px !important;
+  padding:8px;
   object-fit:contain !important;
-  display:block !important;
+  background:transparent !important;
 }
 
 .service-body{
