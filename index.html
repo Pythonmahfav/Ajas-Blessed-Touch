@@ -414,16 +414,25 @@
       color:var(--muted);
       line-height:1.75;
     }
-
-.service {
-  width: 100%;
-  background: rgba(255,255,255,.97);
-  border: 1px solid rgba(172,89,232,.30);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 12px 30px rgba(49,32,20,.12);
-  transition: transform .35s ease, box-shadow .35s ease;
-}
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .service {
+      width: 100%;
+      background: rgba(255,255,255,.97);
+      border: 1px solid rgba(172,89,232,.30);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(49,32,20,.12);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
 
 .service:hover {
   transform: translateY(-8px);
