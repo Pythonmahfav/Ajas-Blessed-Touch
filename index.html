@@ -595,11 +595,14 @@
         }
       
         .service-image img {
-          width: 100%;
-          height: 100%;
+          width: 90%;
+          height: 90%;
           object-fit: contain;
           object-position: center;
           display: block;
+          margin: auto;
+          border-radius: 18px;
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         }
       
         /* SERVICE INFORMATION */
@@ -1059,7 +1062,9 @@
     gap: 30px;
   }
 
-  /* Booking */
+  /* ================
+        Booking 
+  ==================*/
   .booking-area {
     grid-template-columns: 1fr;
   }
@@ -1714,8 +1719,6 @@
   </footer>
 
   <a class="floating" href="sms:19295820780" aria-label="Text Ajas Blessed Touch">✉</a>
-
- <a class="floating" href="sms:19295820780" aria-label="Text Ajas Blessed Touch">✉</a>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
