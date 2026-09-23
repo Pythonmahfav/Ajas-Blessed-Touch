@@ -374,27 +374,7 @@
   background: white;
 }
 
-/* Mobile */
-
-@media (max-width: 600px) {
-
-  .style-slideshow {
-    width: 100%;
-    height: 430px;
-    border-radius: 22px;
-    margin-bottom: 55px;
-  }
-
-  .slide-caption {
-    left: 25px;
-    bottom: 40px;
-  }
-
-  .slide-caption h3 {
-    font-size: 1.5rem;
-  }
-
-  .slide-caption p {
+/*  .slide-caption p {
     font-size: .85rem;
   }
 
@@ -413,45 +393,45 @@
     .section-head p{
       color:var(--muted);
       line-height:1.75;
-    }
+    }*/
      .service-grid{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:18px;
-    width:100%;
-  }
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      width:100%;
+    }
 
-.service{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:24px;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  min-height:0;
-}
+    .service{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:24px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height:0;
+    }
+    
+    .service:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 45px rgba(100,40,130,.20);
+    }
 
-.service:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 22px 45px rgba(100,40,130,.20);
-}
-
-.service-image {
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-  border-radius: 18px;
-}
-
-.service-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  border-radius: 18px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
+    .service-image {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 18px;
+    }
+    
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
 /*.service:hover .service-image img {
   transform: scale(1.05);*/
 }
@@ -465,32 +445,32 @@
       #c9a8d9 50%,
       #e8d4f0 100%
     );
-}
-#services::before {
-  content: "";
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.15);
-  left: -150px;
-  top: 250px;
-  animation: floatingShape 8s ease-in-out infinite;
-  pointer-events: none;
-}
+    }
+    #services::before {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.15);
+      left: -150px;
+      top: 250px;
+      animation: floatingShape 8s ease-in-out infinite;
+      pointer-events: none;
+    }
 
-#services::after {
-  content: "";
-  position: absolute;
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  background: rgba(172,89,232,.15);
-  right: -100px;
-  bottom: 300px;
-  animation: floatingShape 10s ease-in-out infinite reverse;
-  pointer-events: none;
-}
+    #services::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(172,89,232,.15);
+      right: -100px;
+      bottom: 300px;
+      animation: floatingShape 10s ease-in-out infinite reverse;
+      pointer-events: none;
+    }
 
 @keyframes floatingShape {
   0%, 100% {
@@ -572,37 +552,110 @@
   margin:0 10px 10px;
   padding:20px;
 }
-/* PHONE */
-@media (max-width: 600px) {
-  html, body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 15px;
-  }
-  .service-card {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-  .service-image {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-  }
-    .service-body {
-    padding: 25px 22px;
-    text-align: center;
-  }
-  .service-body .choose-service,
-  .service-body button {
-    margin: 10px auto 0;
-  }
-}
+    
+/* =====================
+    PHONE 
+  =======================*/
+       
+      
+      @media (max-width: 600px) {
+      
+        /* Prevent the page from being wider than the phone */
+        html,
+        body {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+        }
+      
+        /* SERVICE SECTION */
+        .service-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 24px;
+          width: 100%;
+          padding: 0;
+        }
+      
+        /* EACH SERVICE */
+        .service {
+          width: 100%;
+          max-width: 100%;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+        }
+      
+        /* SERVICE PHOTO */
+        .service-image {
+          width: 100%;
+          height: 250px !important;
+          padding: 8px;
+          overflow: hidden;
+        }
+      
+        .service-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+          display: block;
+        }
+      
+        /* SERVICE INFORMATION */
+        .service-body {
+          width: calc(100% - 20px);
+          margin: 0 10px 10px;
+          padding: 24px 20px 25px;
+          border-radius: 22px;
+          text-align: center;
+        }
+      
+        .service-body h3 {
+          font-size: 2rem;
+          line-height: 1.15;
+          margin: 0 0 15px;
+        }
+      
+        .service-body p {
+          font-size: 1rem;
+          line-height: 1.65;
+          margin: 0 auto 18px;
+          max-width: 500px;
+        }
+      
+        .service-body small {
+          display: block;
+          font-size: 1rem;
+          margin: 12px 0 18px;
+        }
+      
+        .service-body .btn {
+          width: 100%;
+          max-width: 240px;
+          margin: 0 auto;
+        }
+      
+        /* SERVICES HEADING */
+        .section-head {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      
+        .section-head .eyebrow {
+          font-size: 2rem;
+        }
+      
+        .section-head h2 {
+          font-size: 2.3rem;
+          line-height: 1.1;
+        }
+      
+        .services-description {
+          font-size: .95rem;
+          line-height: 1.6;
+        }
+      } 
 
   
 /* =========================
