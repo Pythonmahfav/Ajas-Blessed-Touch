@@ -376,7 +376,7 @@
 
 /* Mobile */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
 
   .style-slideshow {
     width: 100%;
@@ -513,15 +513,19 @@
   text-align:center;
 }
 
-.service-body h3{
-  margin:0 0 8px;
-  font-size:22px;
-}
+ .service-body h3 {
+    font-size: 32px;
+    line-height: 1.15;
+    margin-bottom: 15px;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
 
-.service-body p{
-  margin:0 0 14px;
-  line-height:1.5;
-}
+.service-body p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
 
 .service-body small {
   display: block;
@@ -570,18 +574,33 @@
 }
 /* PHONE */
 @media (max-width: 600px) {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
   .services-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 20px;
+    padding: 15px;
   }
-
   .service-card {
-    width: 100;
-    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
   }
-
   .service-image {
-    width: 100px;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+  }
+    .service-body {
+    padding: 25px 22px;
+    text-align: center;
+  }
+  .service-body .choose-service,
+  .service-body button {
+    margin: 10px auto 0;
   }
 }
 
